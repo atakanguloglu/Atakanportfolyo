@@ -1,0 +1,4 @@
+Site logosu ve favicon (sekme ikonu) için:
+1. Logonuzu (mavi hexagon + "Atakan Güloğlu" + "PORTFÖY SITEM" tasarımı) bu klasöre "logo.png" adıyla kaydedin.
+2. Önerilen boyut: genişlik yaklaşık 200–400 px, yükseklik 56–80 px (oranı koruyun).
+3. Kaydettikten sonra header, footer ve tarayıcı sekmesi otomatik bu logoyu kullanacaktır.

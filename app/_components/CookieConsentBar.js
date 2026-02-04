@@ -1,0 +1,43 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
+const CONSENT_KEY = "cookie_consent";
+
+export default function CookieConsentBar() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const accepted = localStorage.getItem(CONSENT_KEY) === "accepted";
+    setVisible(!accepted);
+  }, []);
+
+  const accept = () => {
+    localStorage.setItem(CONSENT_KEY, "accepted");
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div
+      className="fixed bottom-0 left-0 right-0 z-[100] border-t border-gray-200 bg-white/95 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
+      role="banner"
+      aria-label="Çerez bildirimi"
+    >
+      <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-6xl">
+        <p className="text-sm text-gray-700 text-center sm:text-left">
+          Çerezler ve benzeri teknolojiler kullanılmaktadır. Siteyi kullanmaya devam ederek kabul etmiş olursunuz.
+        </p>
+        <button
+          type="button"
+          onClick={accept}
+          className="flex-shrink-0 px-5 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white text-sm font-medium transition-colors"
+        >
+          Kabul Et
+        </button>
+      </div>
+    </div>
+  );
+}

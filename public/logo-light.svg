@@ -1,0 +1,8 @@
+<svg width="200" height="44" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- İkon: beyaz kare + tek çizgi (petrol) -->
+  <rect width="44" height="44" rx="10" fill="white"/>
+  <path d="M14 30L22 22L14 14" stroke="#1e3a5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 22H30" stroke="#1e3a5f" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- İsim -->
+  <text x="56" y="29" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" letter-spacing="-0.02em" fill="white">Atakan</text>
+</svg>
