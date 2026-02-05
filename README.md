@@ -1,71 +1,68 @@
-# 🚀 Free Responsive Template
+# Atakan Güloğlu — Portfolyo Sitesi
 
-![Free Template Preview](https://khurramshafeeq.vercel.app/og-image.jpg)
+Kişisel portfolyo ve blog sitesi. **Next.js**, **Tailwind CSS** ve **PostgreSQL** ile geliştirildi.
 
-A **free, modern, and responsive website template** built using **Next.js** and **Tailwind CSS**. Perfect for personal portfolios, landing pages, and small business websites. This template is production-ready, mobile-friendly, and easy to customize for your needs.
-
----
-
-## 📂 Features
-
-- ⚛️ Built with **Next.js** (React-based framework)
-- 🎨 Styled using **Tailwind CSS**
-- ✅ Fully responsive layout (mobile, tablet, desktop)
-- ⚡ Fast performance and optimized build
-- 🌍 Cross-browser compatibility
-- 💡 SEO-ready and scalable structure
-- 🔧 Easy to customize and extend
+**Canlı site:** [https://atakanguloglu.com.tr](https://atakanguloglu.com.tr)
 
 ---
 
-## 🚀 Live Demo
+## Özellikler
 
-Visit the live preview here: [https://khurramshafeeq.vercel.app](https://khurramshafeeq.vercel.app)
+- Ana sayfa (tanıtım, projeler, referanslar, iletişim)
+- Blog (yazılar, yorumlar, bülten)
+- Çalışma hayatı / timeline
+- Admin paneli (blog, projeler, müşteri logoları, referanslar, iletişim mesajları, bülten aboneleri, ziyaret istatistikleri)
+- SEO (sitemap, robots, Open Graph), Google Search Console doğrulama
+- Mobil uyumlu, cookie bilgilendirmesi
 
 ---
 
-## 🛠️ Installation & Setup
+## Kurulum
 
-Follow the steps below to set up and run the project locally:
+### Gereksinimler
 
-### 1. Clone the Repository
+- Node.js 18+
+- PostgreSQL
 
-Clone this repository to your local machine using Git:
+### 1. Repoyu klonlayın
 
 ```bash
-git clone https://github.com/khurramshafeeq/picto.git
+git clone https://github.com/atakanguloglu/Atakanportfolyo.git
+cd Atakanportfolyo
 ```
 
-### 2. Navigate to the Project Directory
-
-```bash
-cd your-repo-name
-```
-
-### 3. Install Dependencies
-
-Make sure you have Node.js and npm installed. Then run:
+### 2. Bağımlılıklar
 
 ```bash
 npm install
 ```
 
-### 4. Start the Development Server
+### 3. Ortam değişkenleri
 
-Start the development server with the following command:
+`env.example` dosyasını `.env.local` olarak kopyalayıp PostgreSQL, `NEXT_PUBLIC_APP_URL`, `JWT_SECRET` vb. değerleri doldurun.
+
+### 4. Veritabanı
+
+```bash
+npm run db:setup
+npm run db:seed
+```
+
+### 5. Geliştirme sunucusu
 
 ```bash
 npm run dev
 ```
 
-The project will be available at: http://localhost:3000
+Tarayıcıda: http://localhost:3000  
+Admin paneli: http://localhost:3000/admin/login (varsayılan: `admin` / `admin123`)
 
-## 📝 License
+---
 
-This project is free to use for both personal and commercial purposes. No attribution required, but it's appreciated.
+## Lisans
 
-## 👨‍💻 Author
+Bu proje kişisel kullanım içindir.
 
-Designed by [Templatecookie](https://www.figma.com/@templatecookie)
+## Geliştirici
 
-Developed by [Khurram Shafeeq](https://x.com/Khurram_shafeeq)
+**Atakan Güloğlu** — [atakanguloglu.com.tr](https://atakanguloglu.com.tr)

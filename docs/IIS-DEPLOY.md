@@ -77,7 +77,7 @@ Proje dosyalarını `C:\inetpub\wwwroot\atakanguloglu.com.tr` içine attıysan, 
 ### 2.1 Projeyi sunucuya kopyala
 
 - Git ile clone edebilir veya dosyaları FTP/klasörle kopyalayabilirsin.
-- Örnek: `C:\sites\picto` (yol örnek, istediğin yere koyabilirsin).
+- Örnek: `C:\inetpub\wwwroot\atakanguloglu.com.tr` (veya istediğin yere koyabilirsin).
 
 ### 2.2 Ortam değişkenleri (.env.local)
 
@@ -109,7 +109,7 @@ CONTACT_EMAIL=atakan2100120@gmail.com
 Sunucuda proje klasöründe (PowerShell veya CMD):
 
 ```bash
-cd C:\sites\picto
+cd C:\inetpub\wwwroot\atakanguloglu.com.tr
 npm ci
 npm run build
 ```
@@ -136,7 +136,7 @@ Standalone, tek bir Node sunucusu gibi çalışır. Port vereceğiz (örn. 3000)
 ### Seçenek A: Doğrudan çalıştırma (test için)
 
 ```bash
-cd C:\sites\picto\.next\standalone
+cd C:\inetpub\wwwroot\atakanguloglu.com.tr\.next\standalone
 set PORT=3000
 node server.js
 ```
@@ -154,17 +154,17 @@ Tarayıcıda `http://sunucu-ip:3000` ile kontrol et.
 2. Proje kökünde bir start script’i kullan veya doğrudan:
 
    ```bash
-   cd C:\sites\picto
+   cd C:\inetpub\wwwroot\atakanguloglu.com.tr
    set PORT=3000
-   pm2 start npm --name "picto" -- start
+   pm2 start npm --name "atakanguloglu" -- start
    ```
 
    veya standalone kullanıyorsan:
 
    ```bash
-   cd C:\sites\picto\.next\standalone
+   cd C:\inetpub\wwwroot\atakanguloglu.com.tr\.next\standalone
    set PORT=3000
-   pm2 start server.js --name "picto"
+   pm2 start server.js --name "atakanguloglu"
    ```
 
 3. Sunucu açıldığında otomatik başlasın:
@@ -184,13 +184,13 @@ Böylece Node uygulaması sürekli 3000 portunda çalışır; IIS bu porta proxy
 
 1. **IIS Yöneticisi** aç.
 2. **Sites** → sağ tık → **Add Website**.
-3. **Site name:** Picto (veya istediğin ad).
-4. **Physical path:** Örneğin `C:\sites\picto\public` (sadece statik dosya için; asıl uygulama Node’da). İstersen boş bir klasör de olabilir, çünkü tüm istekler proxy’e gidecek.
+3. **Site name:** atakanguloglu (veya istediğin ad).
+4. **Physical path:** Örneğin `C:\inetpub\wwwroot\atakanguloglu.com.tr` (sadece statik dosya için; asıl uygulama Node’da). İstersen boş bir klasör de olabilir, çünkü tüm istekler proxy’e gidecek.
 5. **Binding:** Domain’i yaz: `atakanguloglu.com.tr` (istersen `www.atakanguloglu.com.tr` ekle), gerekirse HTTPS bağlaması ekle.
 
 ### 4.2 Proxy kuralı (web.config)
 
-Site kökünde `web.config` oluştur (path’i 4.1’deki “Physical path” ile aynı klasör olacak, örn. `C:\sites\picto\public\web.config` veya sitenin “path”i nereyse orada):
+Site kökünde `web.config` oluştur (path’i 4.1’deki “Physical path” ile aynı klasör olacak, örn. `C:\inetpub\wwwroot\atakanguloglu.com.tr\web.config` veya sitenin “path”i nereyse orada):
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -261,7 +261,7 @@ Node’u ayrı çalıştırmak yerine **IIS’in siteyi başlatıp durdurmasıyl
 - Projedeki `scripts/setup-db.js` ve migration/seed script’lerini **sunucuda bir kez** çalıştır:
 
   ```bash
-  cd C:\sites\picto
+  cd C:\inetpub\wwwroot\atakanguloglu.com.tr
   node scripts/setup-db.js
   node scripts/seed-admin.js
   ```
