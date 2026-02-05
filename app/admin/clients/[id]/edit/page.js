@@ -26,7 +26,7 @@ export default function EditClientPage() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`/api/clients/${id}`, { credentials: "include" })
+    fetch(`/api/clients/${id}`, { credentials: "include", cache: "no-store" })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (data) {
@@ -82,6 +82,10 @@ export default function EditClientPage() {
       });
       const data = await res.json();
       if (res.ok) {
+        setForm((f) => ({ ...f, image: imageToSave }));
+        setFile(null);
+        setPreview(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
         router.push("/admin/clients");
         router.refresh();
       } else {
@@ -132,7 +136,14 @@ export default function EditClientPage() {
           {currentImageUrl && !preview && (
             <div className="mb-3 flex items-center gap-3">
               <div className="relative w-16 h-16 rounded border border-gray-200 overflow-hidden bg-gray-50 flex-shrink-0">
-                <Image src={currentImageUrl} alt={form.name} fill className="object-contain p-1" sizes="64px" />
+                <Image
+                  src={currentImageUrl}
+                  alt={form.name}
+                  fill
+                  className="object-contain p-1"
+                  sizes="64px"
+                  unoptimized={form.image?.endsWith?.(".svg")}
+                />
               </div>
               <span className="text-sm text-gray-500 font-mono">{form.image}</span>
             </div>

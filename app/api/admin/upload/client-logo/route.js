@@ -10,8 +10,17 @@ function sanitizeFilename(name) {
   const ext = path.extname(name).toLowerCase() || ".png";
   const base = path.basename(name, path.extname(name))
     .replace(/[^a-zA-Z0-9._-]/g, "_")
-    .slice(0, 80) || "logo";
+    .slice(0, 60) || "logo";
   return `${base}${ext}`;
+}
+
+/** Benzersiz dosya adı: aynı isimle yüklemede üzerine yazmayı ve cache sorununu azaltır */
+function uniqueFilename(originalName) {
+  const safe = sanitizeFilename(originalName);
+  const stamp = Date.now();
+  const ext = path.extname(safe);
+  const base = path.basename(safe, ext);
+  return `${base}-${stamp}${ext}`;
 }
 
 /** POST /api/admin/upload/client-logo — Logo dosyası yükle (sadece admin), public/clients/ içine kaydeder */
@@ -35,7 +44,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Dosya boyutu 2 MB'dan küçük olmalı." }, { status: 400 });
     }
 
-    const filename = sanitizeFilename(file.name || "logo.png");
+    const filename = uniqueFilename(file.name || "logo.png");
     const dir = path.join(process.cwd(), "public", "clients");
     await mkdir(dir, { recursive: true });
     const filepath = path.join(dir, filename);

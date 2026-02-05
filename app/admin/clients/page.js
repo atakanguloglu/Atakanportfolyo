@@ -6,10 +6,11 @@ import Image from "next/image";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
-function imageSrc(image) {
+function imageSrc(image, cacheBuster) {
   if (!image) return "";
   if (image.startsWith("http") || image.startsWith("/")) return image;
-  return `/clients/${image}`;
+  const base = `/clients/${image}`;
+  return cacheBuster ? `${base}?v=${cacheBuster}` : base;
 }
 
 export default function AdminClientsPage() {
@@ -52,7 +53,14 @@ export default function AdminClientsPage() {
 
   const imageBody = (row) => (
     <div className="relative w-12 h-12 rounded border border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center">
-      <Image src={imageSrc(row.image)} alt={row.name} fill className="object-contain p-1" sizes="48px" />
+      <Image
+        src={imageSrc(row.image, row.updated_at || row.id)}
+        alt={row.name}
+        fill
+        className="object-contain p-1"
+        sizes="48px"
+        unoptimized={row.image?.endsWith(".svg")}
+      />
     </div>
   );
 
