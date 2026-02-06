@@ -73,7 +73,7 @@ export default function NewClientPage() {
         <Link href="/admin/clients" className="text-gray-500 hover:text-gray-700 no-underline">
           ← Listeye dön
         </Link>
-        <h1 className="text-2xl font-semibold text-gray-900">Yeni müşteri logosu</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Yeni müşteri logosu</h1>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 bg-white rounded-xl border border-gray-200 p-6">
         {error && (

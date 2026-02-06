@@ -49,39 +49,31 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
         />
       )}
       <aside
-        className={`fixed left-0 top-0 bottom-0 z-50 md:relative md:z-auto bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 bottom-0 z-50 md:relative md:z-auto bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-all duration-300 ease-in-out ${
           collapsed ? "w-16" : "w-64"
         } ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
-      <div className="p-3 flex items-center justify-between gap-2 border-b border-gray-100 min-h-[56px]">
+      <div className="p-3 flex items-center justify-between gap-2 border-b border-gray-100 dark:border-gray-700 min-h-[56px]">
         <Link
           href="/admin"
-          className={`flex items-center min-w-0 flex-1 overflow-hidden ${collapsed ? "justify-center" : "gap-3"}`}
+          className="flex items-center justify-center min-w-0 flex-1 overflow-hidden"
           onClick={closeMobileMenu}
+          title="Admin ana sayfa"
         >
           <span className={`shrink-0 flex items-center overflow-hidden ${collapsed ? "h-8 max-w-10" : "h-9"}`}>
             <Image
               src="/logo.png"
-              alt=""
+              alt="Admin"
               width={120}
               height={40}
-              className="h-full w-auto max-h-full object-contain object-left"
+              className="h-full w-auto max-h-full object-contain object-center dark:invert"
             />
           </span>
-          {!collapsed && (
-            <span className="flex items-center gap-2 min-w-0 pl-1">
-              <span className="w-0.5 h-5 rounded-full bg-primary-500 shrink-0 self-center" aria-hidden />
-              <span className="text-[15px] font-semibold tracking-tight truncate">
-                <span className="text-gray-600">Admin</span>
-                <span className="text-primary-600 font-bold"> Panel</span>
-              </span>
-            </span>
-          )}
         </Link>
         <button
           type="button"
           onClick={closeMobileMenu}
-          className="md:hidden w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:shadow transition-all"
+          className="md:hidden w-9 h-9 rounded-full border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-sm flex items-center justify-center text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500 hover:text-gray-700 dark:hover:text-gray-100 hover:shadow transition-all"
           title="Menüyü kapat"
           aria-label="Menüyü kapat"
         >
@@ -92,7 +84,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
         <button
           type="button"
           onClick={() => setCollapsed(!collapsed)}
-          className="hidden md:flex w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm items-center justify-center text-primary-600 hover:border-primary-300 hover:bg-primary-50 hover:shadow transition-all shrink-0"
+          className="hidden md:flex w-9 h-9 rounded-full border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-sm items-center justify-center text-primary-600 dark:text-primary-400 hover:border-primary-300 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-500/20 hover:shadow transition-all shrink-0"
           title={collapsed ? "Menüyü aç" : "Menüyü kapat"}
           aria-label={collapsed ? "Menüyü aç" : "Menüyü kapat"}
         >
@@ -112,7 +104,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
           href="/admin"
           onClick={closeMobileMenu}
           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg no-underline transition ${
-            pathname === "/admin" ? "bg-primary-500 text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            pathname === "/admin" ? "bg-primary-500 text-white" : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
           }`}
         >
           <i className="pi pi-home text-lg shrink-0" />
@@ -126,7 +118,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
                 type="button"
                 onClick={() => setBlogMenuOpen(!blogMenuOpen)}
                 className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg no-underline border-0 bg-transparent cursor-pointer text-left transition text-base ${
-                  isBlogSectionActive ? "bg-primary-100 text-primary-700" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  isBlogSectionActive ? "bg-primary-100 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300" : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
                 }`}
               >
                 <i className="pi pi-book text-lg shrink-0" />
@@ -143,7 +135,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
                         href={sub.href}
                         onClick={closeMobileMenu}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg no-underline transition ${
-                          isActive ? "bg-primary-500 text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                          isActive ? "bg-primary-500 text-white" : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
                         }`}
                       >
                         <i className={`pi ${sub.icon} text-lg shrink-0`} />
@@ -157,7 +149,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
             {navItems.slice(1).map((item) => {
               const isActive = pathname === item.href;
               const linkClass = `flex items-center gap-3 px-3 py-2.5 rounded-lg no-underline transition ${
-                isActive ? "bg-primary-500 text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                isActive ? "bg-primary-500 text-white" : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
               }`;
               return (
                 <Link key={item.href} href={item.href} onClick={closeMobileMenu} className={linkClass}>
@@ -173,7 +165,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
               href="/admin/blogs"
               onClick={closeMobileMenu}
               className={`flex items-center justify-center p-2.5 rounded-lg no-underline transition ${
-                pathname === "/admin/blogs" || pathname.startsWith("/admin/blogs/") ? "bg-primary-500 text-white" : "text-gray-600 hover:bg-gray-100"
+                pathname === "/admin/blogs" || pathname.startsWith("/admin/blogs/") ? "bg-primary-500 text-white" : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
               title="Bloglar"
             >
@@ -183,7 +175,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
               href="/admin/comments"
               onClick={closeMobileMenu}
               className={`flex items-center justify-center p-2.5 rounded-lg no-underline transition ${
-                pathname === "/admin/comments" ? "bg-primary-500 text-white" : "text-gray-600 hover:bg-gray-100"
+                pathname === "/admin/comments" ? "bg-primary-500 text-white" : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
               title="Yorumlar"
             >
@@ -197,7 +189,7 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
                   href={item.href}
                   onClick={closeMobileMenu}
                   className={`flex items-center justify-center p-2.5 rounded-lg no-underline transition ${
-                    isActive ? "bg-primary-500 text-white" : "text-gray-600 hover:bg-gray-100"
+                    isActive ? "bg-primary-500 text-white" : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`}
                   title={item.label}
                 >
@@ -209,11 +201,11 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
         )}
       </nav>
 
-      <div className="p-3 border-t border-gray-100">
+      <div className="p-3 border-t border-gray-100 dark:border-gray-700">
         <button
           type="button"
           onClick={() => { closeMobileMenu(); handleLogout(); }}
-          className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg font-medium text-white bg-red-500 hover:bg-red-600 active:bg-red-700 border border-red-600 shadow-sm transition no-underline cursor-pointer"
+          className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg font-medium text-white bg-red-500 hover:bg-red-600 dark:hover:bg-red-600 active:bg-red-700 border border-red-600 shadow-sm transition no-underline cursor-pointer"
         >
           <i className="pi pi-sign-out text-lg shrink-0" />
           {!collapsed && <span>Çıkış</span>}

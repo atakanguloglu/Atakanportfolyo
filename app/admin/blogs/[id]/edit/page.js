@@ -87,7 +87,7 @@ export default function EditBlogPage() {
         <Link href="/admin/blogs" className="text-gray-500 hover:text-gray-800 no-underline text-sm font-medium transition-colors flex items-center gap-1">
           <i className="pi pi-arrow-left text-xs" /> Listeye dön
         </Link>
-        <h1 className="text-2xl font-semibold text-gray-900">Blog yazısını düzenle</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Blog yazısını düzenle</h1>
       </div>
       <form onSubmit={handleSubmit} className="space-y-8">
         <section className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">

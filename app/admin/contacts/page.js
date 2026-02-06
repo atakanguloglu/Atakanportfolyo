@@ -64,7 +64,7 @@ export default function AdminContactsPage() {
 
   const messageBody = (row) => (
     <div
-      className="text-gray-800 line-clamp-2 break-words max-w-[280px]"
+      className="text-gray-800 dark:text-gray-200 line-clamp-2 break-words max-w-[280px]"
       style={{ wordBreak: "break-word", overflow: "hidden" }}
       title={row.message || ""}
     >
@@ -74,8 +74,8 @@ export default function AdminContactsPage() {
 
   return (
     <div className="w-full max-w-5xl xl:max-w-none xl:px-8 2xl:px-12 mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">İletişim Mesajları</h1>
-      <div className="admin-datatable-mobile-cards bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">İletişim Mesajları</h1>
+      <div className="admin-datatable-mobile-cards bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         <DataTable
           value={contacts}
           loading={loading}

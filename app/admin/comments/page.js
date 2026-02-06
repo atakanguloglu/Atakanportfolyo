@@ -79,13 +79,13 @@ export default function AdminCommentsPage() {
       <Button
         icon={row.is_approved ? "pi pi-times" : "pi pi-check"}
         label={row.is_approved ? "Onayı kaldır" : "Onayla"}
-        className="p-button-text p-button-sm"
+        className="p-button-text p-button-sm admin-table-action"
         onClick={() => handleApprove(row)}
         title={row.is_approved ? "Onayı kaldır" : "Onayla"}
       />
       <Button
         icon="pi pi-eye"
-        className="p-button-text p-button-sm"
+        className="p-button-text p-button-sm admin-table-action"
         title="Detay"
         onClick={() => setSelectedComment(row)}
       />
@@ -99,15 +99,15 @@ export default function AdminCommentsPage() {
   );
 
   const blogBody = (row) => (
-    <Link href={`/blogs/${row.blog_slug}`} target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:underline no-underline">
+    <Link href={`/blogs/${row.blog_slug}`} target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-sky-300 hover:underline dark:hover:text-sky-200 no-underline">
       {row.blog_title || "—"}
     </Link>
   );
 
   return (
     <div className="w-full max-w-5xl xl:max-w-none xl:px-8 2xl:px-12 mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Yorumlar</h1>
-      <div className="admin-datatable-mobile-cards bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Yorumlar</h1>
+      <div className="admin-datatable-mobile-cards bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         <DataTable
           value={comments}
           loading={loading}
@@ -142,31 +142,31 @@ export default function AdminCommentsPage() {
           <div className="p-4 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Yazı</label>
-                <p className="text-gray-900 mt-0.5">
+                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Yazı</label>
+                <p className="text-gray-900 dark:text-white mt-0.5">
                   <Link
                     href={`/blogs/${selectedComment.blog_slug}`}
-                    className="text-primary-500 hover:underline no-underline"
+                    className="text-primary-600 dark:text-sky-300 hover:underline no-underline"
                   >
                     {selectedComment.blog_title || "—"}
                   </Link>
                 </p>
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Durum</label>
-                <p className="text-gray-900 mt-0.5">{selectedComment.is_approved ? "Onaylı" : "Onay bekliyor"}</p>
+                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Durum</label>
+                <p className="text-gray-900 dark:text-white mt-0.5">{selectedComment.is_approved ? "Onaylı" : "Onay bekliyor"}</p>
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Yazan</label>
-                <p className="text-gray-900 mt-0.5">{selectedComment.author_name || "—"}</p>
+                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Yazan</label>
+                <p className="text-gray-900 dark:text-white mt-0.5">{selectedComment.author_name || "—"}</p>
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">E-posta</label>
-                <p className="text-gray-900 mt-0.5">{selectedComment.author_email || "—"}</p>
+                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">E-posta</label>
+                <p className="text-gray-900 dark:text-white mt-0.5">{selectedComment.author_email || "—"}</p>
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Tarih</label>
-                <p className="text-gray-900 mt-0.5">
+                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Tarih</label>
+                <p className="text-gray-900 dark:text-white mt-0.5">
                   {new Date(selectedComment.created_at).toLocaleString("tr-TR", {
                     dateStyle: "long",
                     timeStyle: "short",
@@ -175,12 +175,12 @@ export default function AdminCommentsPage() {
               </div>
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Yorum</label>
-              <div className="mt-1 p-4 bg-gray-50 rounded-lg border border-gray-100 text-gray-800 whitespace-pre-wrap min-h-[80px]">
+              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Yorum</label>
+              <div className="mt-1 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600 text-gray-800 dark:text-gray-200 whitespace-pre-wrap min-h-[80px]">
                 {selectedComment.content || "—"}
               </div>
             </div>
-            <div className="pt-4 border-t border-gray-200 flex flex-wrap gap-2">
+            <div className="pt-4 border-t border-gray-200 dark:border-gray-600 flex flex-wrap gap-2">
               <Button
                 icon={selectedComment.is_approved ? "pi pi-times" : "pi pi-check"}
                 label={selectedComment.is_approved ? "Onayı kaldır" : "Onayla"}

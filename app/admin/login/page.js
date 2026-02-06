@@ -7,6 +7,7 @@ import Image from "next/image";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Message } from "primereact/message";
+import ThemeToggle from "@/app/_components/ThemeToggle";
 
 const LOGIN_IMAGES = [
   "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80",
@@ -54,8 +55,11 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 md:p-6">
-      <div className="w-full max-w-6xl min-h-[85vh] md:min-h-[80vh] bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4 md:p-6 relative">
+      <div className="absolute top-4 right-4 z-10">
+        <ThemeToggle />
+      </div>
+      <div className="w-full max-w-6xl min-h-[85vh] md:min-h-[80vh] bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-200 dark:border-gray-700">
         {/* Sol: Yazılım / teknoloji temalı geçişli görseller */}
         <div className="relative w-full md:w-[45%] min-h-[220px] md:min-h-full bg-primary-600 overflow-hidden">
           {LOGIN_IMAGES.map((src, i) => (
@@ -85,16 +89,16 @@ export default function AdminLoginPage() {
         {/* Sağ: Giriş formu */}
         <div className="flex-1 flex flex-col justify-center p-8 md:p-12 lg:p-16">
           <div className="max-w-md w-full mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
               Admin Girişi
             </h1>
-            <p className="text-gray-500 mt-2 text-base md:text-lg">
+            <p className="text-gray-500 dark:text-gray-400 mt-2 text-base md:text-lg">
               Blog ve içerik yönetimi
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 md:mt-10 space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Kullanıcı adı
                 </label>
                 <InputText
@@ -107,7 +111,7 @@ export default function AdminLoginPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Şifre
                 </label>
                 <InputText
@@ -135,7 +139,7 @@ export default function AdminLoginPage() {
             <p className="mt-8 text-center">
               <Link
                 href="/"
-                className="text-primary-500 hover:underline text-base"
+                className="text-primary-600 dark:text-sky-300 hover:underline dark:hover:text-sky-200 text-base font-medium"
               >
                 ← Siteye dön
               </Link>

@@ -59,24 +59,24 @@ export default function AdminProfilePage() {
   return (
     <div className="max-w-xl mx-auto px-4 py-8">
       <div className="flex items-center gap-4 mb-6">
-        <Link href="/admin" className="text-gray-500 hover:text-gray-700 no-underline">
+        <Link href="/admin" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 no-underline">
           ← Panele dön
         </Link>
-        <h1 className="text-2xl font-semibold text-gray-900">Şifre değiştir</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Şifre değiştir</h1>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 space-y-4">
         {error && (
-          <p className="text-sm text-red-600 bg-red-50 p-3 rounded-lg">{error}</p>
+          <p className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/20 p-3 rounded-lg">{error}</p>
         )}
         {success && (
-          <p className="text-sm text-green-700 bg-green-50 p-3 rounded-lg">
+          <p className="text-sm text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-500/20 p-3 rounded-lg">
             Şifreniz güncellendi.
           </p>
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Mevcut şifre *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mevcut şifre *</label>
           <Password
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
@@ -90,7 +90,7 @@ export default function AdminProfilePage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Yeni şifre *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Yeni şifre *</label>
           <Password
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
@@ -103,7 +103,7 @@ export default function AdminProfilePage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Yeni şifre (tekrar) *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Yeni şifre (tekrar) *</label>
           <Password
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}

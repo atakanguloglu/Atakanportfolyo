@@ -21,9 +21,9 @@ export default function DashboardStats() {
     return (
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 mb-8">
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="bg-white rounded-xl border border-gray-200 p-4 animate-pulse">
-            <div className="h-4 bg-gray-200 rounded w-1/2 mb-3" />
-            <div className="h-8 bg-gray-200 rounded w-16" />
+          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 animate-pulse">
+            <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-1/2 mb-3" />
+            <div className="h-8 bg-gray-200 dark:bg-gray-600 rounded w-16" />
           </div>
         ))}
       </div>
@@ -33,12 +33,12 @@ export default function DashboardStats() {
   if (!stats) return null;
 
   const cards = [
-    { label: "İletişim mesajı", value: stats.contacts, href: "/admin/contacts", color: "text-primary-600" },
-    { label: "Onay bekleyen yorum", value: stats.commentsPending, href: "/admin/comments", color: stats.commentsPending > 0 ? "text-amber-600" : "text-gray-600" },
-    { label: "Blog yazısı", value: stats.blogs, href: "/admin/blogs", color: "text-gray-900" },
-    { label: "Proje", value: stats.projects, href: "/admin/projects", color: "text-gray-900" },
-    { label: "Referans", value: stats.testimonials ?? 0, href: "/admin/testimonials", color: "text-gray-900" },
-    { label: "Bülten abonesi", value: stats.newsletter ?? 0, href: "/admin/newsletter", color: "text-gray-900" },
+    { label: "İletişim mesajı", value: stats.contacts, href: "/admin/contacts", color: "text-primary-600 dark:text-primary-400" },
+    { label: "Onay bekleyen yorum", value: stats.commentsPending, href: "/admin/comments", color: stats.commentsPending > 0 ? "text-amber-600 dark:text-amber-400" : "text-gray-600 dark:text-gray-400" },
+    { label: "Blog yazısı", value: stats.blogs, href: "/admin/blogs", color: "text-gray-900 dark:text-white" },
+    { label: "Proje", value: stats.projects, href: "/admin/projects", color: "text-gray-900 dark:text-white" },
+    { label: "Referans", value: stats.testimonials ?? 0, href: "/admin/testimonials", color: "text-gray-900 dark:text-white" },
+    { label: "Bülten abonesi", value: stats.newsletter ?? 0, href: "/admin/newsletter", color: "text-gray-900 dark:text-white" },
   ];
 
   return (
@@ -47,9 +47,9 @@ export default function DashboardStats() {
         <Link
           key={card.href}
           href={card.href}
-          className="block p-4 bg-white rounded-xl border border-gray-200 hover:border-primary-500 hover:shadow-md transition no-underline"
+          className="block p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 hover:shadow-md transition no-underline"
         >
-          <div className="text-sm text-gray-500">{card.label}</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">{card.label}</div>
           <div className={`text-2xl font-semibold mt-1 ${card.color}`}>{card.value}</div>
         </Link>
       ))}

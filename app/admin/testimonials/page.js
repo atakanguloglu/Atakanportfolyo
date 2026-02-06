@@ -66,13 +66,13 @@ export default function AdminTestimonialsPage() {
   return (
     <div className="w-full max-w-5xl xl:max-w-none xl:px-8 2xl:px-12 mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900">Referanslar</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Referanslar</h1>
         <Link href="/admin/testimonials/new">
           <Button label="Yeni referans" icon="pi pi-plus" className="bg-primary-500 hover:bg-primary-600 border-primary-500" />
         </Link>
       </div>
       <ConfirmDialog />
-      <div className="admin-datatable-mobile-cards bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="admin-datatable-mobile-cards bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         <DataTable
           value={testimonials}
           loading={loading}

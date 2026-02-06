@@ -97,6 +97,33 @@ html.dark .p-inputtextarea::placeholder {
   color: rgb(156 163 175);
 }
 
+/* Admin: DataTable başlık ve hücre metinleri dark modda okunaklı */
+html.dark .p-datatable .p-datatable-thead > tr > th {
+  color: rgb(229 231 235);
+  border-color: rgb(55 65 81);
+  background: rgb(31 41 55);
+}
+html.dark .p-datatable .p-datatable-tbody > tr > td {
+  color: rgb(229 231 235);
+  border-color: rgb(55 65 81);
+}
+html.dark .p-datatable .p-datatable-tbody > tr {
+  background: rgb(31 41 55);
+}
+html.dark .p-datatable .p-datatable-tbody > tr.p-row-odd {
+  background: rgb(55 65 81);
+}
+/* Admin tablo: Yazı linki ve text butonlar (Onayı kaldır, Detay, Düzenle) dark modda okunaklı */
+html.dark .p-datatable .p-button.p-button-text:not(.p-button-danger),
+html.dark .admin-table-action.p-button-text:not(.p-button-danger) {
+  color: rgb(147 197 253) !important;
+}
+html.dark .p-datatable .p-button.p-button-text:not(.p-button-danger):hover,
+html.dark .admin-table-action.p-button-text:not(.p-button-danger):hover {
+  color: rgb(191 219 254) !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+
 /* Admin zengin metin editörü */
 .rich-editor-body {
   line-height: 1.65;
