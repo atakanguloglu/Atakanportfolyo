@@ -7,7 +7,7 @@ import { Button } from "primereact/button";
 import { Message } from "primereact/message";
 
 const inputClass =
-  "border-0 border-b border-gray-300 focus:border-primary-500 rounded-none focus:outline-none focus:shadow-none focus:placeholder-primary-500 pl-0 w-full";
+  "border-0 border-b border-gray-300 dark:border-gray-500 dark:bg-transparent dark:text-gray-100 dark:placeholder-gray-400 focus:border-primary-500 rounded-none focus:outline-none focus:shadow-none focus:placeholder-primary-500 pl-0 w-full";
 
 export default function ContactForm() {
   const [form, setForm] = useState({

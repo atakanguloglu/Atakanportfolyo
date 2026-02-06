@@ -15,8 +15,10 @@ export default function AdminHeader() {
   return (
     <header className="bg-white border-b border-gray-200">
       <div className="w-full max-w-4xl xl:max-w-none xl:px-8 2xl:px-12 mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/admin" className="text-lg font-semibold text-gray-900">
-          Admin Panel
+        <Link href="/admin" className="flex items-center gap-2 text-lg font-semibold tracking-tight no-underline">
+          <span className="w-1 h-5 rounded-full bg-primary-500 shrink-0" aria-hidden />
+          <span className="text-gray-600">Admin</span>
+          <span className="text-primary-600"> Panel</span>
         </Link>
         <div className="flex items-center gap-4">
           <Link

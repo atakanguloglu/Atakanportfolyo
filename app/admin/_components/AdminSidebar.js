@@ -69,26 +69,41 @@ export default function AdminSidebar({ mobileMenuOpen = false, setMobileMenuOpen
             />
           </span>
           {!collapsed && (
-            <span className="text-base font-semibold text-gray-800 truncate">Admin Panel</span>
+            <span className="flex items-center gap-2 min-w-0 pl-1">
+              <span className="w-0.5 h-5 rounded-full bg-primary-500 shrink-0 self-center" aria-hidden />
+              <span className="text-[15px] font-semibold tracking-tight truncate">
+                <span className="text-gray-600">Admin</span>
+                <span className="text-primary-600 font-bold"> Panel</span>
+              </span>
+            </span>
           )}
         </Link>
         <button
           type="button"
           onClick={closeMobileMenu}
-          className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 shrink-0 md:hidden"
+          className="md:hidden w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:shadow transition-all"
           title="Menüyü kapat"
           aria-label="Menüyü kapat"
         >
-          <i className="pi pi-times text-lg" />
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
         <button
           type="button"
           onClick={() => setCollapsed(!collapsed)}
-          className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 shrink-0 hidden md:block"
+          className="hidden md:flex w-9 h-9 rounded-full border border-gray-200 bg-white shadow-sm items-center justify-center text-primary-600 hover:border-primary-300 hover:bg-primary-50 hover:shadow transition-all shrink-0"
           title={collapsed ? "Menüyü aç" : "Menüyü kapat"}
           aria-label={collapsed ? "Menüyü aç" : "Menüyü kapat"}
         >
-          <i className={`pi ${collapsed ? "pi-chevron-right" : "pi-chevron-left"} text-lg`} />
+          <svg
+            className={`w-5 h-5 transition-transform duration-200 ${collapsed ? "" : "rotate-180"}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
         </button>
       </div>
 

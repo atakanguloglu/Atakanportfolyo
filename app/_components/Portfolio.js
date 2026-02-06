@@ -83,10 +83,10 @@ export default function Portfolio() {
               href={project.link || "#"}
               target={project.link?.startsWith("http") ? "_blank" : undefined}
               rel={project.link?.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="p-button p-button-outlined mt-5 text-primary-500 font-bold no-underline"
+              className="p-button p-button-outlined mt-5 text-primary-500 font-bold no-underline dark:!border-primary-400 dark:!text-primary-200 dark:hover:!bg-primary-500/20 dark:hover:!text-primary-100"
             >
               Örnek Çalışma
-              <ArrowRightIcon className="size-6 text-primary-500 ml-3" />
+              <ArrowRightIcon className="size-6 text-primary-500 dark:text-primary-200 ml-3" />
             </Link>
           </div>
         </div>

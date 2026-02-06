@@ -64,10 +64,10 @@ export default function NewsletterForm({ variant = "footer", className = "" }) {
   }
 
   return (
-    <div className={`bg-gradient-to-br from-primary-50/60 to-white rounded-2xl border border-primary-100/80 p-6 sm:p-8 shadow-sm ${className}`}>
+    <div className={`bg-gradient-to-br from-primary-50/60 to-white dark:from-gray-800 dark:to-gray-800 rounded-2xl border border-primary-100/80 dark:border-gray-700 p-6 sm:p-8 shadow-sm ${className}`}>
       <div className="max-w-lg mx-auto text-center">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Yeni yazılardan haberdar olun</h3>
-        <p className="text-sm text-gray-600 mb-5 leading-relaxed">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Yeni yazılardan haberdar olun</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-5 leading-relaxed">
           E-posta adresinizi bırakın; yeni yazılar yayınlandığında size haber verelim. Spam göndermiyoruz.
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-3">
@@ -77,7 +77,7 @@ export default function NewsletterForm({ variant = "footer", className = "" }) {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-posta adresiniz"
             required
-            className="flex-1 min-w-0 h-12 px-4 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition text-sm"
+            className="flex-1 min-w-0 h-12 px-4 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition text-sm"
             disabled={loading}
           />
           <button
@@ -89,11 +89,11 @@ export default function NewsletterForm({ variant = "footer", className = "" }) {
           </button>
         </form>
         {result && (
-          <p className={`text-sm mt-4 ${result.type === "success" ? "text-primary-600" : "text-red-600"}`}>
+          <p className={`text-sm mt-4 ${result.type === "success" ? "text-primary-600 dark:text-primary-400" : "text-red-600 dark:text-red-400"}`}>
             {result.text}
           </p>
         )}
-        <p className="text-xs text-gray-500 mt-4">E-posta adresiniz yalnızca bülten için kullanılır.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">E-posta adresiniz yalnızca bülten için kullanılır.</p>
       </div>
     </div>
   );

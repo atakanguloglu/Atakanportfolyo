@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 const SECTION_IDS = ["home", "about", "process", "portfolio", "services", "contact"];
-const linkClass = "no-underline text-gray-800 hover:text-primary-600 transition-colors font-medium";
-const activeClass = "no-underline text-primary-600 font-bold bg-primary-50/80 rounded-lg px-2 py-1 -mx-2";
+const linkClass = "no-underline text-gray-800 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-300 transition-colors font-medium";
+const activeClass = "no-underline text-primary-600 dark:text-primary-200 font-bold bg-primary-50/80 dark:bg-primary-500/40 dark:ring-1 dark:ring-primary-400/70 rounded-lg px-2 py-1 -mx-2";
 
 export default function Page() {
   const router = useRouter();
@@ -84,8 +84,8 @@ export default function Page() {
           href="/#contact"
           className={`p-button font-bold no-underline text-white ${
             isHome && activeSection === "contact"
-              ? "bg-primary-600 border-primary-600 hover:bg-primary-700"
-              : "bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600"
+              ? "bg-primary-600 border-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:border-primary-500 dark:hover:bg-primary-400"
+              : "bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600 dark:bg-primary-500 dark:border-primary-500 dark:hover:bg-primary-400"
           }`}
         >
           İletişim
@@ -94,14 +94,14 @@ export default function Page() {
           <>
             <Link
               href="/admin"
-              className="p-button font-bold no-underline border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-primary-50 hover:border-primary-600 hover:text-primary-600"
+              className="p-button font-bold no-underline border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-primary-50 hover:border-primary-600 hover:text-primary-600 dark:text-primary-300 dark:border-primary-400 dark:hover:bg-primary-500/20 dark:hover:text-primary-200 dark:hover:border-primary-400"
             >
               Admin
             </Link>
             <button
               type="button"
               onClick={handleLogout}
-              className="p-button font-bold no-underline border-2 border-gray-300 text-gray-600 bg-transparent hover:bg-gray-50 hover:border-gray-400 hover:text-gray-800 rounded"
+              className="p-button font-bold no-underline border-2 border-gray-300 dark:border-gray-500 text-gray-600 dark:text-gray-200 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-400 rounded"
             >
               Çıkış
             </button>
@@ -109,7 +109,7 @@ export default function Page() {
         ) : (
           <Link
             href="/admin/login"
-            className="p-button font-bold no-underline border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-primary-50 hover:border-primary-600 hover:text-primary-600"
+            className="p-button font-bold no-underline border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-primary-50 hover:border-primary-600 hover:text-primary-600 dark:text-primary-300 dark:border-primary-400 dark:hover:bg-primary-500/20 dark:hover:text-primary-200 dark:hover:border-primary-400"
           >
             Giriş
           </Link>
@@ -118,16 +118,16 @@ export default function Page() {
       <button
         type="button"
         onClick={toggleMenu}
-        className="lg:hidden flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg hover:bg-gray-100 active:bg-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        className="lg:hidden flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
         aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
         aria-expanded={isOpen}
       >
         {isOpen ? (
-          <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+          <svg className="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+          <svg className="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         )}
@@ -142,33 +142,33 @@ export default function Page() {
               aria-hidden
             />
             <div
-              className="nav-mobile-menu fixed top-20 right-4 z-[9999] flex min-w-[240px] max-w-[calc(100vw-2rem)] max-h-[min(calc(100vh-6rem),420px)] flex-col rounded-2xl bg-white py-2 text-base tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/10 overflow-y-auto"
+              className="nav-mobile-menu fixed top-20 right-4 z-[9999] flex min-w-[240px] max-w-[calc(100vw-2rem)] max-h-[min(calc(100vh-6rem),420px)] flex-col rounded-2xl bg-white dark:bg-gray-800 py-2 text-base tracking-tight text-slate-900 dark:text-gray-100 shadow-xl ring-1 ring-slate-900/10 dark:ring-gray-700 overflow-y-auto"
               role="dialog"
               aria-label="Sayfa menüsü"
               onClick={(e) => e.stopPropagation()}
             >
-              <Link href="/#home" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "home" ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/#home" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "home" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 Ana Sayfa
               </Link>
-              <Link href="/#about" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "about" ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/#about" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "about" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 Hakkımda
               </Link>
-              <Link href="/calisma-hayati" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isCalismaHayati ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/calisma-hayati" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isCalismaHayati ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 Çalışma Hayatım
               </Link>
-              <Link href="/#process" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "process" ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/#process" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "process" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 Süreç
               </Link>
-              <Link href="/#portfolio" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "portfolio" ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/#portfolio" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "portfolio" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 Portfolyo
               </Link>
-              <Link href="/blogs" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isBlog ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/blogs" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isBlog ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 Blog
               </Link>
-              <Link href="/#services" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "services" ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/#services" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "services" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 Hizmetler
               </Link>
-              <Link href="/#contact" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "contact" ? "text-primary-600 font-bold bg-primary-50" : "text-gray-950 hover:bg-gray-100 active:bg-gray-200"}`}>
+              <Link href="/#contact" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "contact" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 İletişim
               </Link>
               {isLoggedIn ? (
@@ -179,7 +179,7 @@ export default function Page() {
                   <button
                     type="button"
                     onClick={() => { closeMenu(); handleLogout(); }}
-                    className="flex items-center justify-center min-h-[48px] w-full px-4 py-3 rounded-lg no-underline touch-manipulation border-2 border-gray-300 text-gray-600 font-bold bg-transparent hover:bg-gray-50 active:bg-gray-100 mx-2 mt-1"
+                    className="flex items-center justify-center min-h-[48px] w-full px-4 py-3 rounded-lg no-underline touch-manipulation border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-bold bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 active:bg-gray-100 dark:active:bg-gray-600 mx-2 mt-1"
                   >
                     Çıkış
                   </button>

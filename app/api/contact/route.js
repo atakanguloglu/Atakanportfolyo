@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { query } from "@/app/lib/db";
 import { Resend } from "resend";
+import { checkRateLimit } from "@/app/lib/rate-limit";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const CONTACT_MAX_PER_MINUTE = 3;
 
 /**
  * POST /api/contact
@@ -10,6 +12,14 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
  */
 export async function POST(request) {
   try {
+    const limit = checkRateLimit(request, "contact", CONTACT_MAX_PER_MINUTE);
+    if (limit.limited) {
+      return NextResponse.json(
+        { success: false, error: "Çok fazla istek. Lütfen biraz sonra tekrar deneyin." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const { name, email, location, budget, subject, message } = body;
 

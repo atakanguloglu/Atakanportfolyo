@@ -61,7 +61,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
 
   if (initialBlogs.length === 0) {
     return (
-      <p className="text-center text-gray-500 py-12">Henüz yayınlanmış yazı yok.</p>
+      <p className="text-center text-gray-500 dark:text-gray-400 py-12">Henüz yayınlanmış yazı yok.</p>
     );
   }
 
@@ -73,14 +73,14 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
 
   return (
     <>
-      <div className="mb-10 bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
-        <div className="px-4 py-3 border-b border-gray-100 bg-gray-50/50">
-          <span className="text-xs font-medium uppercase tracking-wider text-gray-500">Ara ve filtrele</span>
+      <div className="mb-10 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200/80 dark:border-gray-700 shadow-sm overflow-hidden">
+        <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/80">
+          <span className="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Ara ve filtrele</span>
         </div>
         <div className="p-4 sm:p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
             <div className="flex-1 relative flex items-center">
-              <span className="absolute left-3.5 pointer-events-none" aria-hidden>
+              <span className="absolute left-3.5 pointer-events-none text-gray-400 dark:text-gray-500" aria-hidden>
                 <SearchIcon />
               </span>
               <input
@@ -88,7 +88,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Başlık veya özette ara..."
-                className="w-full h-11 pl-11 pr-4 rounded-xl border border-gray-200 bg-gray-50/50 text-gray-900 placeholder:text-gray-400 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition text-sm"
+                className="w-full h-11 pl-11 pr-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/50 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-gray-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition text-sm"
                 aria-label="Yazı ara"
               />
             </div>
@@ -96,7 +96,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="h-11 px-4 rounded-xl border border-gray-200 bg-gray-50/50 text-gray-700 text-sm font-medium focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition min-w-[120px]"
+                className="h-11 px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 text-sm font-medium focus:bg-white dark:focus:bg-gray-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition min-w-[120px]"
                 aria-label="Sıralama"
               >
                 {SORT_OPTIONS.map((opt) => (
@@ -109,7 +109,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                 <select
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
-                  className="h-11 px-4 rounded-xl border border-gray-200 bg-gray-50/50 text-gray-700 text-sm font-medium focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition min-w-[140px]"
+                  className="h-11 px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 text-sm font-medium focus:bg-white dark:focus:bg-gray-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition min-w-[140px]"
                   aria-label="Yazar"
                 >
                   <option value="">Tüm yazarlar</option>
@@ -135,20 +135,20 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
             </div>
           </div>
           <div className="mt-3 flex items-center justify-between">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {filteredAndSorted.length === 0
                 ? "Bu kriterlere uygun yazı bulunamadı."
                 : `${filteredAndSorted.length} yazı`}
             </p>
             {filteredAndSorted.length > 0 && (
-              <span className="text-xs text-gray-400 font-medium tabular-nums">{initialBlogs.length} yazı toplam</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500 font-medium tabular-nums">{initialBlogs.length} yazı toplam</span>
             )}
           </div>
         </div>
       </div>
 
       {filteredAndSorted.length === 0 ? (
-        <p className="text-center text-gray-500 py-12">
+        <p className="text-center text-gray-500 dark:text-gray-400 py-12">
           Farklı bir arama terimi veya filtre deneyin.
         </p>
       ) : (
@@ -157,9 +157,9 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
             <Link
               key={blog.id}
               href={`/blogs/${blog.slug}`}
-              className="group block bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-primary-500 hover:shadow-lg transition no-underline"
+              className="group block bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:border-primary-500 hover:shadow-lg transition no-underline"
             >
-              <div className="relative w-full aspect-video bg-gray-100">
+              <div className="relative w-full aspect-video bg-gray-100 dark:bg-gray-700">
                 {blog.image_url ? (
                   <Image
                     src={blog.image_url.startsWith("/") ? blog.image_url : blog.image_url}
@@ -169,19 +169,19 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-300 text-4xl font-light">
+                  <div className="w-full h-full flex items-center justify-center text-gray-300 dark:text-gray-500 text-4xl font-light">
                     {blog.title.charAt(0)}
                   </div>
                 )}
               </div>
               <div className="p-5">
-                <h2 className="text-lg font-semibold text-gray-900 group-hover:text-primary-500 transition line-clamp-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition line-clamp-2">
                   {blog.title}
                 </h2>
                 {blog.excerpt && (
-                  <p className="text-sm text-gray-500 mt-1 line-clamp-2">{blog.excerpt}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">{blog.excerpt}</p>
                 )}
-                <p className="text-xs text-gray-400 mt-2">
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
                   {blog.published_at
                     ? new Date(blog.published_at).toLocaleDateString("tr-TR")
                     : new Date(blog.created_at).toLocaleDateString("tr-TR")}

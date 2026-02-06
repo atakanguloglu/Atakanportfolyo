@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { query } from "@/app/lib/db";
+import { checkRateLimit } from "@/app/lib/rate-limit";
+
+const COMMENT_MAX_PER_MINUTE = 5;
 
 /** GET /api/blogs/slug/[slug]/comments — Yazıya ait onaylı yorumları listele (açık) */
 export async function GET(request, { params }) {
@@ -27,6 +30,14 @@ export async function GET(request, { params }) {
 /** POST /api/blogs/slug/[slug]/comments — Yeni yorum ekle (açık, onay bekler) */
 export async function POST(request, { params }) {
   try {
+    const limit = checkRateLimit(request, "comment", COMMENT_MAX_PER_MINUTE);
+    if (limit.limited) {
+      return NextResponse.json(
+        { success: false, error: "Çok fazla yorum. Lütfen biraz sonra tekrar deneyin." },
+        { status: 429 }
+      );
+    }
+
     const slug = params?.slug;
     if (!slug) return NextResponse.json({ error: "Slug gerekli." }, { status: 400 });
 

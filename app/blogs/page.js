@@ -26,16 +26,16 @@ export default async function BlogsPage() {
   const blogs = await getBlogs();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-12 lg:py-20">
         <header className="text-center max-w-2xl mx-auto mb-14">
           <p className="text-xs font-medium uppercase tracking-widest text-primary-600 mb-3">
             Yazılar
           </p>
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-4">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight mb-4">
             Blog
           </h1>
-          <p className="text-gray-600 text-lg leading-relaxed mb-6">
+          <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
             Yazılarım ve güncel paylaşımlarım.
           </p>
           <Link
@@ -49,13 +49,13 @@ export default async function BlogsPage() {
 
         <BlogListWithFilters blogs={blogs} />
 
-        <section className="max-w-2xl mx-auto mt-24 pt-16 border-t border-gray-200/80" aria-labelledby="newsletter-heading">
+        <section className="max-w-2xl mx-auto mt-24 pt-16 border-t border-gray-200/80 dark:border-gray-700" aria-labelledby="newsletter-heading">
           <h2 id="newsletter-heading" className="sr-only">Bülten aboneliği</h2>
           <NewsletterForm variant="blog" />
         </section>
 
         <p className="text-center mt-16">
-          <Link href="/" className="text-primary-500 hover:underline font-medium">
+          <Link href="/" className="text-primary-500 dark:text-primary-400 hover:underline dark:hover:text-primary-300 font-medium">
             ← Ana sayfaya dön
           </Link>
         </p>

@@ -4,9 +4,21 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import LayoutWrapper from "@/app/_components/LayoutWrapper";
+import { ThemeProvider } from "@/app/_components/ThemeProvider";
 
 // Vercel script'leri sadece Vercel'de çalışır; IIS/kendi sunucuda 404 verir, koşullu render ediyoruz.
 const isVercel = process.env.VERCEL === "1";
+
+const themeScript = `
+(function() {
+  var t = localStorage.getItem('theme');
+  if (t === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+})();
+`;
 
 import { Work_Sans } from "next/font/google";
 
@@ -90,17 +102,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="tr">
-      <body className={`${worksans.className} overflow-x-hidden`}>
-        <LayoutWrapper>
-          {children}
-          {isVercel && (
-            <>
-              <Analytics />
-              <SpeedInsights />
-            </>
-          )}
-        </LayoutWrapper>
+    <html lang="tr" suppressHydrationWarning>
+      <body className={`${worksans.className} overflow-x-hidden bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <ThemeProvider>
+          <LayoutWrapper>
+            {children}
+            {isVercel && (
+              <>
+                <Analytics />
+                <SpeedInsights />
+              </>
+            )}
+          </LayoutWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

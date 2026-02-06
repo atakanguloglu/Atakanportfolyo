@@ -18,13 +18,14 @@
   --highlight-text-color: #ffffff;
 }
 
-/* Portfolyo sitesi her zaman açık tema; dark mode kapatıldı (referans/iletişim altındaki siyahlığı önlemek için) */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+/* Dark mode — class ile kontrol (ThemeProvider + script) */
+html.dark {
+  color-scheme: dark;
+}
+html.dark body {
+  --background: #111827;
+  --foreground: #f3f4f6;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -63,16 +64,37 @@ pre {
   border-radius: 100%;
 }
 
-/* Mobil navigasyon menüsü — her zaman opak, arkadaki içerik görünmesin */
+/* Dark modda outlined butonlar (CV İndir, Tüm yazılar vb.) görünür olsun */
+html.dark .p-button.p-button-outlined,
+html.dark a.p-button.p-button-outlined {
+  border-color: rgb(96 165 250) !important;
+  color: rgb(191 219 254) !important;
+}
+html.dark .p-button.p-button-outlined:hover,
+html.dark a.p-button.p-button-outlined:hover {
+  background: rgba(59, 130, 246, 0.2) !important;
+  border-color: rgb(147 197 253) !important;
+  color: rgb(224 242 254) !important;
+}
+
+/* Mobil navigasyon menüsü — her zaman opak; dark tema Navigation.js içinde dark: sınıfları ile */
 .nav-mobile-menu {
   background-color: #ffffff !important;
   opacity: 1 !important;
+}
+html.dark .nav-mobile-menu {
+  background-color: #1f2937 !important; /* dark mode fallback */
 }
 
 /* Form alanları — yazı, iletişim vb. kutuları yuvarlak */
 .p-inputtext,
 .p-inputtextarea {
   border-radius: 0.75rem;
+}
+/* Dark modda iletişim formu placeholder okunaklı olsun */
+html.dark .p-inputtext::placeholder,
+html.dark .p-inputtextarea::placeholder {
+  color: rgb(156 163 175);
 }
 
 /* Admin zengin metin editörü */

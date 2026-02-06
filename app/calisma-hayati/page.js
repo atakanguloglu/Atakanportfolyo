@@ -60,12 +60,12 @@ const timelineData = [
 
 export default function CalismaHayatiPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-12 lg:py-20">
-        <h1 className="text-3xl lg:text-4xl font-semibold text-gray-900 mb-2 text-center">
+        <h1 className="text-3xl lg:text-4xl font-semibold text-gray-900 dark:text-white mb-2 text-center">
           Çalışma Hayatım
         </h1>
-        <p className="text-gray-500 text-center max-w-xl mx-auto mb-16">
+        <p className="text-gray-500 dark:text-gray-400 text-center max-w-xl mx-auto mb-16">
           Kariyer ve deneyimlerim, tarih sırasıyla.
         </p>
 

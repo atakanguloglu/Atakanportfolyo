@@ -16,9 +16,9 @@ export default function LayoutWrapper({ children }) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-50 dark:bg-gray-900">
       <Header />
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow pt-20 sm:pt-24">{children}</main>
       <Footer />
       <ScrollToTop />
       <CookieConsentBar />

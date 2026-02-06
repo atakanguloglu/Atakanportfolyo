@@ -91,7 +91,7 @@ export default function Blogs() {
       <div className="text-center mt-6">
         <Link
           href="/blogs"
-          className="inline-block p-button p-button-outlined text-primary-500 font-bold no-underline"
+          className="inline-block p-button p-button-outlined text-primary-500 font-bold no-underline dark:!border-primary-400 dark:!text-primary-200 dark:hover:!bg-primary-500/20 dark:hover:!text-primary-100"
         >
           Tüm yazılar →
         </Link>

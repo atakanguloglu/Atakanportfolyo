@@ -22,12 +22,12 @@ export default function CookieConsentBar() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[100] border-t border-gray-200 bg-white/95 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
+      className="fixed bottom-0 left-0 right-0 z-[100] border-t border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
       role="banner"
       aria-label="Çerez bildirimi"
     >
       <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-6xl">
-        <p className="text-sm text-gray-700 text-center sm:text-left">
+        <p className="text-sm text-gray-700 dark:text-gray-300 text-center sm:text-left">
           Çerezler ve benzeri teknolojiler kullanılmaktadır. Siteyi kullanmaya devam ederek kabul etmiş olursunuz.
         </p>
         <button

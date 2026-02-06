@@ -1,9 +1,20 @@
 import { NextResponse } from "next/server";
 import { query } from "@/app/lib/db";
 import { verifyPassword, createToken, getAuthCookieName, getAuthCookieOptions } from "@/app/lib/auth";
+import { checkRateLimit } from "@/app/lib/rate-limit";
+
+const LOGIN_MAX_PER_MINUTE = 5;
 
 export async function POST(request) {
   try {
+    const limit = checkRateLimit(request, "login", LOGIN_MAX_PER_MINUTE);
+    if (limit.limited) {
+      return NextResponse.json(
+        { success: false, error: "Çok fazla deneme. Lütfen bir dakika sonra tekrar deneyin." },
+        { status: 429, headers: limit.retryAfter ? { "Retry-After": String(limit.retryAfter) } : {} }
+      );
+    }
+
     const body = await request.json();
     const { username, password } = body;
 
