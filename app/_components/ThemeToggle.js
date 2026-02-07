@@ -9,7 +9,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="w-10 h-10 shrink-0 rounded-full border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 flex items-center justify-center transition-colors shadow-sm"
+      className="w-10 h-10 shrink-0 rounded-full border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 flex items-center justify-center transition-colors shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
       title={theme === "dark" ? "Açık tema" : "Koyu tema"}
       aria-label={theme === "dark" ? "Açık temaya geç" : "Koyu temaya geç"}
     >

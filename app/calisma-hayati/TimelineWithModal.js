@@ -20,7 +20,7 @@ function CardContent({ item, num }) {
   );
 }
 
-export default function TimelineWithModal({ timelineData }) {
+export default function TimelineWithModal({ timelineData, modalCloseLabel = "Kapat" }) {
   const [selected, setSelected] = useState(null);
   const [animateIn, setAnimateIn] = useState(false);
 
@@ -120,7 +120,7 @@ export default function TimelineWithModal({ timelineData }) {
               type="button"
               onClick={close}
               className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              aria-label="Kapat"
+              aria-label={modalCloseLabel}
             >
               <span className="text-2xl leading-none" aria-hidden>×</span>
             </button>

@@ -1,10 +1,13 @@
 // import "primereact/resources/themes/lara-light-indigo/theme.css"; // Choose your theme
 // import "primereact/resources/primereact.min.css";
 // import "primeicons/primeicons.css";
+import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import LayoutWrapper from "@/app/_components/LayoutWrapper";
 import { ThemeProvider } from "@/app/_components/ThemeProvider";
+import { I18nProvider } from "@/app/_components/I18nProvider";
+import { getMessages, LOCALE_COOKIE, DEFAULT_LOCALE } from "@/app/lib/i18n";
 
 // Vercel script'leri sadece Vercel'de çalışır; IIS/kendi sunucuda 404 verir, koşullu render ediyoruz.
 const isVercel = process.env.VERCEL === "1";
@@ -100,21 +103,27 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get(LOCALE_COOKIE)?.value || DEFAULT_LOCALE;
+  const messages = getMessages(locale);
+
   return (
-    <html lang="tr" suppressHydrationWarning>
+    <html lang={locale === "en" ? "en" : "tr"} suppressHydrationWarning>
       <body className={`${worksans.className} overflow-x-hidden bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <ThemeProvider>
-          <LayoutWrapper>
-            {children}
-            {isVercel && (
-              <>
-                <Analytics />
-                <SpeedInsights />
-              </>
-            )}
-          </LayoutWrapper>
+          <I18nProvider locale={locale} messages={messages}>
+            <LayoutWrapper>
+              {children}
+              {isVercel && (
+                <>
+                  <Analytics />
+                  <SpeedInsights />
+                </>
+              )}
+            </LayoutWrapper>
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

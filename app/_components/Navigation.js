@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "@/app/_components/I18nProvider";
 
 const SECTION_IDS = ["home", "about", "process", "portfolio", "services", "contact"];
 const linkClass = "no-underline text-gray-800 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-300 transition-colors font-medium";
@@ -11,6 +12,7 @@ const activeClass = "no-underline text-primary-600 dark:text-primary-200 font-bo
 export default function Page() {
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -60,25 +62,25 @@ export default function Page() {
     <nav className="relative flex items-center shrink-0">
       <div className="hidden lg:flex lg:items-center lg:gap-x-10 text-sm">
         <Link href="/#home" className={isHome && activeSection === "home" ? activeClass : linkClass}>
-          Ana Sayfa
+          {t("nav.home")}
         </Link>
         <Link href="/#about" className={isHome && activeSection === "about" ? activeClass : linkClass}>
-          Hakkımda
+          {t("nav.about")}
         </Link>
         <Link href="/calisma-hayati" className={isCalismaHayati ? activeClass : linkClass}>
-          Çalışma Hayatım
+          {t("nav.workLife")}
         </Link>
         <Link href="/#process" className={isHome && activeSection === "process" ? activeClass : linkClass}>
-          Süreç
+          {t("nav.process")}
         </Link>
         <Link href="/#portfolio" className={isHome && activeSection === "portfolio" ? activeClass : linkClass}>
-          Portfolyo
+          {t("nav.portfolio")}
         </Link>
         <Link href="/blogs" className={isBlog ? activeClass : linkClass}>
-          Blog
+          {t("nav.blog")}
         </Link>
         <Link href="/#services" className={isHome && activeSection === "services" ? activeClass : linkClass}>
-          Hizmetler
+          {t("nav.services")}
         </Link>
         <Link
           href="/#contact"
@@ -88,7 +90,7 @@ export default function Page() {
               : "bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600 dark:bg-primary-500 dark:border-primary-500 dark:hover:bg-primary-400"
           }`}
         >
-          İletişim
+          {t("nav.contact")}
         </Link>
         {isLoggedIn ? (
           <>
@@ -96,14 +98,14 @@ export default function Page() {
               href="/admin"
               className="p-button font-bold no-underline border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-primary-50 hover:border-primary-600 hover:text-primary-600 dark:text-primary-300 dark:border-primary-400 dark:hover:bg-primary-500/20 dark:hover:text-primary-200 dark:hover:border-primary-400"
             >
-              Admin
+              {t("nav.admin")}
             </Link>
             <button
               type="button"
               onClick={handleLogout}
               className="p-button font-bold no-underline border-2 border-gray-300 dark:border-gray-500 text-gray-600 dark:text-gray-200 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-400 rounded"
             >
-              Çıkış
+              {t("nav.logout")}
             </button>
           </>
         ) : (
@@ -111,7 +113,7 @@ export default function Page() {
             href="/admin/login"
             className="p-button font-bold no-underline border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-primary-50 hover:border-primary-600 hover:text-primary-600 dark:text-primary-300 dark:border-primary-400 dark:hover:bg-primary-500/20 dark:hover:text-primary-200 dark:hover:border-primary-400"
           >
-            Giriş
+            {t("nav.login")}
           </Link>
         )}
       </div>
@@ -119,7 +121,7 @@ export default function Page() {
         type="button"
         onClick={toggleMenu}
         className="lg:hidden flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-        aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
+        aria-label={isOpen ? t("nav.menuClose") : t("nav.menuOpen")}
         aria-expanded={isOpen}
       >
         {isOpen ? (
@@ -148,40 +150,40 @@ export default function Page() {
               onClick={(e) => e.stopPropagation()}
             >
               <Link href="/#home" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "home" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                Ana Sayfa
+                {t("nav.home")}
               </Link>
               <Link href="/#about" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "about" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                Hakkımda
+                {t("nav.about")}
               </Link>
               <Link href="/calisma-hayati" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isCalismaHayati ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                Çalışma Hayatım
+                {t("nav.workLife")}
               </Link>
               <Link href="/#process" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "process" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                Süreç
+                {t("nav.process")}
               </Link>
               <Link href="/#portfolio" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "portfolio" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                Portfolyo
+                {t("nav.portfolio")}
               </Link>
               <Link href="/blogs" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isBlog ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                Blog
+                {t("nav.blog")}
               </Link>
               <Link href="/#services" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "services" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                Hizmetler
+                {t("nav.services")}
               </Link>
               <Link href="/#contact" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "contact" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
-                İletişim
+                {t("nav.contact")}
               </Link>
               {isLoggedIn ? (
                 <>
                   <Link href="/admin" onClick={closeMenu} className="flex items-center justify-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation border-2 border-primary-500 text-primary-500 font-bold mx-2 mt-1">
-                    Admin
+                    {t("nav.admin")}
                   </Link>
                   <button
                     type="button"
                     onClick={() => { closeMenu(); handleLogout(); }}
                     className="flex items-center justify-center min-h-[48px] w-full px-4 py-3 rounded-lg no-underline touch-manipulation border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-bold bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 active:bg-gray-100 dark:active:bg-gray-600 mx-2 mt-1"
                   >
-                    Çıkış
+                    {t("nav.logout")}
                   </button>
                 </>
               ) : (
@@ -190,7 +192,7 @@ export default function Page() {
                   onClick={closeMenu}
                   className="flex items-center justify-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation border-2 border-primary-500 text-primary-500 font-bold mx-2 mt-1"
                 >
-                  Giriş
+                  {t("nav.login")}
                 </Link>
               )}
             </div>

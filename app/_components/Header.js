@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/app/_components/Navigation";
 import ThemeToggle from "@/app/_components/ThemeToggle";
+import LanguageSwitcher from "@/app/_components/LanguageSwitcher";
 
 export default function Page() {
   return (
@@ -20,6 +21,7 @@ export default function Page() {
             />
           </Link>
           <div className="shrink-0 flex items-center gap-3 sm:gap-4">
+            <LanguageSwitcher />
             <ThemeToggle />
             <span className="hidden lg:block w-px h-6 bg-gray-200 dark:bg-gray-600 rounded-full" aria-hidden />
             <Navigation />

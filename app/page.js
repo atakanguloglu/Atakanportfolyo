@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { cookies } from "next/headers";
 import Blog from "./_components/Blogs";
 import Clients from "./_components/Clients";
 import Testimonial from "./_components/Testimonial";
@@ -9,6 +10,7 @@ import Portfolio from "./_components/Portfolio";
 import TechLogosBackground from "./_components/TechLogosBackground";
 import { getAuthFromRequest } from "@/app/lib/auth-request";
 import { getSiteProfileImageUrl } from "@/app/lib/site-profile";
+import { getMessages, t, LOCALE_COOKIE, DEFAULT_LOCALE } from "@/app/lib/i18n";
 
 import { Button } from "primereact/button";
 
@@ -24,6 +26,10 @@ import {
 export default async function Home() {
   const auth = await getAuthFromRequest();
   const profileImage = await getSiteProfileImageUrl();
+  const cookieStore = await cookies();
+  const locale = cookieStore.get(LOCALE_COOKIE)?.value || DEFAULT_LOCALE;
+  const messages = getMessages(locale);
+  const T = (key) => t(messages, key);
 
   return (
     <>
@@ -37,32 +43,32 @@ export default async function Home() {
             <div className="lg:w-3/5 grid content-between">
               <div className="lg:mb-32">
                 <h1 className="text-gray-900 dark:text-white font-semibold text-5xl lg:text-7xl">
-                  Merhaba, Ben
+                  {T("home.hero.greeting")}
                   <br />
-                  Atakan Güloğlu
+                  {T("home.hero.name")}
                 </h1>
                 <div className="text-lg text-gray-600 dark:text-gray-300 my-6">
-                  Yazılım Mühendisiyim. Matematiksel algoritmalar, veritabanı yönetimi, otomasyon ve yapay zeka konularına odaklanıyorum. TEKNOFEST savunma sanayi kategorisinde Türkiye üçüncülüğü, Deneyap'ta eğitmenlik; endüstriyel yazılım projelerinde aktif rol alıyorum.
+                  {T("home.hero.intro")}
                 </div>
                 <Link
                   href="#contact"
                   className="p-button bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600 font-bold no-underline"
                 >
-                  Merhaba De!
+                  {T("home.hero.cta")}
                 </Link>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 my-4 lg:my-0">
                 <div className="flex justify-center flex-col items-center gap-y-2 p-6 bg-primary-100 dark:bg-gray-800 rounded-xl">
                   <div className="font-bold text-2xl text-gray-900 dark:text-white">5+ Y.</div>
-                  <div className="text-gray-700 dark:text-gray-300 font-medium">Deneyim</div>
+                  <div className="text-gray-700 dark:text-gray-300 font-medium">{T("home.stats.experience")}</div>
                 </div>
                 <div className="flex justify-center flex-col items-center gap-y-2 p-6 bg-primary-100 dark:bg-gray-800 rounded-xl">
                   <div className="font-bold text-2xl text-gray-900 dark:text-white">30+</div>
-                  <div className="text-gray-700 dark:text-gray-300 font-medium">Tamamlanan Proje</div>
+                  <div className="text-gray-700 dark:text-gray-300 font-medium">{T("home.stats.projects")}</div>
                 </div>
                 <div className="flex justify-center flex-col items-center gap-y-2 p-6 bg-primary-100 dark:bg-gray-800 rounded-xl">
                   <div className="font-bold text-2xl text-gray-900 dark:text-white">20+</div>
-                  <div className="text-gray-700 dark:text-gray-300 font-medium">Mutlu Müşteri</div>
+                  <div className="text-gray-700 dark:text-gray-300 font-medium">{T("home.stats.clients")}</div>
                 </div>
               </div>
             </div>
@@ -142,14 +148,14 @@ export default async function Home() {
             <div className="lg:w-3/5 grid mt-16 lg:mt-0">
               <div>
                 <h1 className="text-gray-900 dark:text-white font-semibold text-4xl">
-                  Yazılım Mühendisiyim
+                  {T("home.about.title")}
                 </h1>
                 <div className="text-lg text-gray-600 dark:text-gray-300 my-6">
                   <p className="mb-3">
-                    Yazılım mühendisliği eğitimim süresince matematiksel algoritmalar, veritabanı yönetimi, otomasyon yazılımları ve yapay zeka konularına odaklandım. JokingSoft-Software ve JokingSoft-ARGE takımlarında liderlik yaptım; TEKNOFEST Pre Take Off 2023 savunma sanayi uzay havacılık kategorisinde Türkiye üçüncülüğü elde ettik.
+                    {T("home.about.paragraph1")}
                   </p>
                   <p>
-                    Deneyap Atölyeleri'nde Yazılım Teknolojileri Eğitmeni olarak lise öğrencilerine eğitim verdim. Yazılım geliştirici olarak kendimi sürekli geliştiriyor, yeni teknolojileri takip ederek çeşitli projelerde aktif rol alıyor ve endüstriyel çözümler üretmek için çalışıyorum.
+                    {T("home.about.paragraph2")}
                   </p>
                 </div>
                 <div className="flex flex-col lg:flex-row items-center gap-6">
@@ -157,7 +163,7 @@ export default async function Home() {
                     href="#portfolio"
                     className="p-button bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600 font-bold no-underline"
                   >
-                    Projelerim
+                    {T("home.about.myProjects")}
                   </Link>
                   <Link
                     href="/Atakan_Guloglu_ATS_CV.pdf"
@@ -167,12 +173,11 @@ export default async function Home() {
                     className="p-button p-button-outlined text-primary-500 font-bold no-underline dark:!border-primary-400 dark:!text-primary-200 dark:hover:!bg-primary-500/20 dark:hover:!text-primary-100"
                   >
                     <ArrowDownTrayIcon className="size-6 text-primary-500 dark:text-primary-200 mr-3" />
-                    CV İndir
+                    {T("home.about.downloadCv")}
                   </Link>
                 </div>
-                {/* Kullandığım teknolojiler — yazılımcı detayı */}
                 <div className="mt-8 pt-6 pb-6 border-t border-gray-200 dark:border-gray-600">
-                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Kullandığım teknolojiler</p>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">{T("home.about.techLabel")}</p>
                   <div className="flex flex-wrap gap-2">
                     {["C#", ".NET", "ABP Framework", "ASP.NET Core", "Python", "Pandas", "OpenCV", "Görüntü İşleme", "Yapay Zeka", "scikit-learn", "TensorFlow", "React", "Next.js", "Node.js", "PostgreSQL", "Docker", "RabbitMQ", "SignalR", "API Entegrasyonu"].map((tech) => (
                       <span key={tech} className="inline-block px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
@@ -192,17 +197,14 @@ export default async function Home() {
             <div className="lg:w-1/2">
               <div className="">
                 <h2 className="text-gray-900 dark:text-white font-semibold text-4xl lg:text-5xl mb-6">
-                  Çalışma Sürecim
+                  {T("home.process.title")}
                 </h2>
                 <div className="text-gray-500 dark:text-gray-400 text-lg">
                   <p className="mb-4">
-                    Her projede araştırma, analiz, tasarım ve lansman aşamalarını
-                    titizlikle uyguluyorum. Müşteri ihtiyaçlarını anlamak ve
-                    kullanıcı odaklı çözümler sunmak önceliğimdir.
+                    {T("home.process.intro1")}
                   </p>
                   <p>
-                    Süreç boyunca şeffaf iletişim ve zamanında teslimat
-                    sağlıyorum.
+                    {T("home.process.intro2")}
                   </p>
                 </div>
               </div>
@@ -215,10 +217,10 @@ export default async function Home() {
                       <NewspaperIcon className="size-6 text-primary-500 dark:text-primary-200 group-hover:text-white" />
                     </div>
                     <div className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                      1. Araştırma
+                      {T("home.process.step1")}
                     </div>
                     <p className="text-gray-600 dark:text-gray-300">
-                      İhtiyaçları ve hedef kitleyi detaylı analiz ediyorum.
+                      {T("home.process.step1Desc")}
                     </p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 p-8 rounded-xl group hover:shadow-[32px_32px_124px_0_rgba(43,56,76,0.10)] dark:border dark:border-gray-700">
@@ -226,10 +228,10 @@ export default async function Home() {
                       <CodeBracketSquareIcon className="size-6 text-primary-500 dark:text-primary-200 group-hover:text-white" />
                     </div>
                     <div className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                      2. Analiz
+                      {T("home.process.step2")}
                     </div>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Verileri değerlendirip en uygun çözümü belirliyorum.
+                      {T("home.process.step2Desc")}
                     </p>
                   </div>
                 </div>
@@ -241,10 +243,10 @@ export default async function Home() {
                       <PencilSquareIcon className="size-6 text-primary-500 dark:text-primary-200 group-hover:text-white" />
                     </div>
                     <div className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                      3. Tasarım
+                      {T("home.process.step3")}
                     </div>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Kullanıcı dostu arayüz ve deneyim tasarlıyorum.
+                      {T("home.process.step3Desc")}
                     </p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 p-8 rounded-xl group hover:shadow-[32px_32px_124px_0_rgba(43,56,76,0.10)] dark:border dark:border-gray-700">
@@ -252,10 +254,10 @@ export default async function Home() {
                       <PresentationChartLineIcon className="size-6 text-primary-500 dark:text-primary-200 group-hover:text-white" />
                     </div>
                     <div className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                      4. Lansman
+                      {T("home.process.step4")}
                     </div>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Projeyi test edip canlıya alıyorum.
+                      {T("home.process.step4Desc")}
                     </p>
                   </div>
                 </div>
@@ -267,11 +269,11 @@ export default async function Home() {
       <div className="py-10 lg:py-24 bg-white dark:bg-gray-900" id="portfolio">
         <div className="container mx-auto px-4 sm:px-6">
           <h2 className="text-gray-900 dark:text-white font-semibold text-4xl lg:text-5xl mb-6 text-center">
-            Portfolyo
+            {T("home.portfolio.title")}
           </h2>
           <div className="text-gray-400 dark:text-gray-400 text-center text-lg lg:w-1/2 mx-auto">
             <p>
-              Web siteleri, uygulamalar ve UI/UX projelerimden seçmeler.
+              {T("home.portfolio.subtitle")}
             </p>
           </div>
           <Portfolio />
@@ -280,7 +282,7 @@ export default async function Home() {
               href="/projects"
               className="p-button bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600 font-bold no-underline"
             >
-              Daha Fazla Proje
+              {T("home.portfolio.moreProjects")}
             </Link>
           </div>
         </div>
@@ -289,12 +291,11 @@ export default async function Home() {
       <div className="py-10 lg:py-24 bg-navy-900">
         <div className="container mx-auto px-4 sm:px-6">
           <h2 className="text-white font-semibold text-4xl lg:text-5xl mb-6 text-center w-full lg:w-1/2 mx-auto">
-            Proje fikriniz mi var? Birlikte konuşalım!
+            {T("home.cta.title")}
           </h2>
           <div className="text-primary-200 text-center text-lg w-full lg:w-1/2 mx-auto">
             <p>
-              Web sitesi, uygulama veya tasarım projeniz için birlikte çalışalım.
-              İhtiyacınıza uygun çözümler üretmek için buradayım.
+              {T("home.cta.subtitle")}
             </p>
           </div>
           <div className="mt-12 text-center">
@@ -302,7 +303,7 @@ export default async function Home() {
               href="#contact"
               className="p-button bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600 font-bold no-underline"
             >
-              <span className="inline-block mr-3">Birlikte çalışalım</span>
+              <span className="inline-block mr-3">{T("home.cta.button")}</span>
               <ArrowRightIcon className="size-6 text-white" />
             </Link>
           </div>
@@ -315,10 +316,10 @@ export default async function Home() {
         <TechLogosBackground />
         <div className="container mx-auto px-4 sm:px-6 relative">
           <h2 className="text-gray-900 dark:text-white font-semibold text-4xl lg:text-5xl mb-6 text-center">
-            Blog
+            {T("home.blogs.title")}
           </h2>
           <div className="text-gray-400 dark:text-gray-400 text-center text-lg w-full lg:w-1/2 mx-auto">
-            Yazılarım ve güncel paylaşımlarım.
+            {T("home.blogs.subtitle")}
           </div>
           <div className="mt-16">
             <Blog />
@@ -330,39 +331,39 @@ export default async function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-32 items-center">
             <div>
               <h3 className="text-gray-950 dark:text-white text-4xl lg:text-5xl font-semibold">
-                Neler Yapıyorum?
+                {T("home.services.title")}
               </h3>
               <div className="text-gray-400 dark:text-gray-400 text-lg mt-6">
-                Web siteleri, mobil uygulamalar, e-ticaret; Python ve C# ile otomasyon, API ve backend sistemleri; yapay zeka, görüntü işleme ve veri analitiği — hepsinde çözüm üretiyorum.
+                {T("home.services.intro1")}
               </div>
               <div className="text-gray-400 text-lg mt-4">
-                Modern teknolojilerle hızlı, güvenilir ve ölçeklenebilir uygulamalar geliştiriyorum.
+                {T("home.services.intro2")}
               </div>
 
               <Link
                 href="#contact"
                 className="p-button bg-primary-500 hover:bg-primary-600 border-primary-500 hover:border-primary-600 font-bold no-underline mt-12"
               >
-                Merhaba De!
+                {T("home.services.cta")}
               </Link>
             </div>
               <div className="flex flex-col gap-6">
               <div className="bg-white dark:bg-gray-800 rounded-md border-0 border-white dark:border-gray-700 hover:border-primary-500 hover:shadow-[0_32px_96px_0_rgba(28,25,25,0.16)] dark:border-l-4 border-l-4 border-solid p-8">
-                <h3 className="text-gray-900 dark:text-white font-semibold text-lg">Web & Uygulama Geliştirme</h3>
+                <h3 className="text-gray-900 dark:text-white font-semibold text-lg">{T("home.services.web")}</h3>
                 <div className="text-gray-700 dark:text-gray-300 mt-4">
-                  Next.js, React, ASP.NET C# ile web siteleri, mobil uyumlu arayüzler ve kurumsal uygulamalar. UX/UI odaklı, ölçeklenebilir çözümler.
+                  {T("home.services.webDesc")}
                 </div>
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-md border-0 border-white dark:border-gray-700 hover:border-primary-500 hover:shadow-[0_32px_96px_0_rgba(28,25,25,0.16)] dark:border-l-4 border-l-4 border-solid p-8">
-                <h3 className="text-gray-900 dark:text-white font-semibold text-lg">Otomasyon & Backend</h3>
+                <h3 className="text-gray-900 dark:text-white font-semibold text-lg">{T("home.services.automation")}</h3>
                 <div className="text-gray-700 dark:text-gray-300 mt-4">
-                  Python, C#, API ve veritabanı ile otomasyon yazılımları, web servisleri (SOAP/REST), mesaj kuyrukları ve backend sistemleri.
+                  {T("home.services.automationDesc")}
                 </div>
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-md border-0 border-white dark:border-gray-700 hover:border-primary-500 hover:shadow-[0_32px_96px_0_rgba(28,25,25,0.16)] dark:border-l-4 border-l-4 border-solid p-8">
-                <h3 className="text-gray-900 dark:text-white font-semibold text-lg">Yapay Zeka & Görüntü İşleme</h3>
+                <h3 className="text-gray-900 dark:text-white font-semibold text-lg">{T("home.services.ai")}</h3>
                 <div className="text-gray-700 dark:text-gray-300 mt-4">
-                  Python ile derin öğrenme, görüntü işleme, yüz/cisim tanıma ve veri analitiği. AI entegrasyonu ve özel modeller.
+                  {T("home.services.aiDesc")}
                 </div>
               </div>
             </div>
@@ -372,10 +373,10 @@ export default async function Home() {
       <div className="pt-10 lg:pt-24 pb-10 lg:pb-12 bg-gray-50 dark:bg-gray-800/50 overflow-x-hidden">
         <div className="container mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1600px] px-4 sm:px-6 lg:px-8">
           <h2 className="text-gray-900 dark:text-white font-semibold text-4xl lg:text-5xl mb-6 text-center">
-            Mutlu Müşteriler
+            {T("home.clients.title")}
           </h2>
           <div className="text-gray-600 dark:text-gray-400 text-center text-lg w-full lg:w-1/2 mx-auto">
-            Birlikte çalıştığım markalar ve projeler.
+            {T("home.clients.subtitle")}
           </div>
           <div className="mt-8 w-full overflow-x-hidden">
             <Clients />
@@ -385,10 +386,10 @@ export default async function Home() {
       <div className="lg:pt-12 pb-10 lg:pb-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 sm:px-6">
           <h2 className="text-gray-900 dark:text-white font-semibold text-4xl lg:text-5xl mb-6 text-center">
-            Referanslar
+            {T("home.testimonials.title")}
           </h2>
           <div className="text-gray-600 dark:text-gray-400 text-center text-lg w-full lg:w-1/2 mx-auto mb-2">
-            Müşterilerimden ve iş ortaklarımdan geri bildirimler.
+            {T("home.testimonials.subtitle")}
           </div>
           <div className="mt-16">
             <Testimonial />
@@ -401,14 +402,13 @@ export default async function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-32 items-center">
             <div>
               <h3 className="text-gray-900 dark:text-white text-4xl font-semibold">
-                Merhaba deyin
+                {T("home.contact.title")}
               </h3>
               <div className="text-gray-400 dark:text-gray-400 text-lg mt-4 mb-4 lg:mb-0">
-                Sorularınız, fikirleriniz veya sadece selamlaşmak için yazabilirsiniz.
-                Mesajlarınıza kısa sürede dönmeye çalışıyorum.
+                {T("home.contact.subtitle")}
               </div>
               <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mt-2 mb-4">
-                Genellikle 24–48 saat içinde yanıt veriyorum.
+                {T("home.contact.responseTime")}
               </p>
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg hover:border-primary-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5">
@@ -416,16 +416,16 @@ export default async function Home() {
                     <i className="pi pi-map-marker group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
                   </div>
                   <div>
-                    <div className="text-gray-700 dark:text-gray-300 text-sm">Konum:</div>
+                    <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.location")}</div>
                     <Link
                       href="https://www.google.com/maps/search/?api=1&query=İstanbul+Türkiye"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-900 dark:text-white font-medium mt-1 hover:text-primary-600 hover:underline no-underline block"
                     >
-                      İstanbul, Türkiye
+                      {T("common.istanbul")}
                     </Link>
-                    <span className="text-xs text-gray-500 dark:text-gray-400"> — Haritada aç</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400"> — {T("home.contact.locationMap")}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg hover:border-primary-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5">
@@ -433,7 +433,7 @@ export default async function Home() {
                     <i className="pi pi-at group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
                   </div>
                   <div>
-                    <div className="text-gray-700 dark:text-gray-300 text-sm">E-posta:</div>
+                    <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.email")}</div>
                     <Link
                       href="mailto:atakan2100120@gmail.com"
                       className="text-gray-900 dark:text-white font-medium mt-1 hover:text-primary-600 hover:underline no-underline block"
@@ -449,7 +449,7 @@ export default async function Home() {
                         <i className="pi pi-phone group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
                       </div>
                       <div className="min-w-0">
-                        <div className="text-gray-700 dark:text-gray-300 text-sm">Telefon:</div>
+                        <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.phone")}</div>
                         <Link
                           href="tel:+905380803023"
                           className="text-gray-900 dark:text-white font-medium mt-1 hover:text-primary-600 hover:underline no-underline block"
@@ -468,8 +468,8 @@ export default async function Home() {
                         <i className="pi pi-whatsapp group-hover:text-white text-green-600 dark:text-green-400 text-2xl leading-none"></i>
                       </div>
                       <div className="min-w-0">
-                        <div className="text-gray-700 dark:text-gray-300 text-sm">Hızlı iletişim:</div>
-                        <span className="text-gray-900 dark:text-white font-medium mt-1 block">WhatsApp ile yaz</span>
+                        <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.whatsapp")}</div>
+                        <span className="text-gray-900 dark:text-white font-medium mt-1 block">{T("home.contact.whatsappLabel")}</span>
                       </div>
                     </Link>
                   </>
@@ -507,10 +507,10 @@ export default async function Home() {
             </div>
             <div className="pl-0">
               <div className="text-gray-400 dark:text-gray-400 text-lg">
-                Formu doldurarak bana ulaşabilirsin. En kısa sürede dönüş yapacağım.
+                {T("home.contact.formIntro")}
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                E-posta ve mesajlarınız yalnızca iletişim için kullanılır, üçüncü taraflarla paylaşılmaz.
+                {T("home.contact.formPrivacy")}
               </p>
               <div className="mt-10">
                 <ContactForm />

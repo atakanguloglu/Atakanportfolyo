@@ -1,0 +1,230 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "workLife": "Work Life",
+    "process": "Process",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "services": "Services",
+    "contact": "Contact",
+    "admin": "Admin",
+    "logout": "Logout",
+    "login": "Login",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Hi, I'm",
+      "name": "Atakan Güloğlu",
+      "intro": "I'm a Software Engineer focused on mathematical algorithms, database management, automation and AI. Turkey 3rd in TEKNOFEST defense industry category, instructor at Deneyap; I take an active role in industrial software projects.",
+      "cta": "Say Hello!"
+    },
+    "stats": {
+      "experience": "Experience",
+      "projects": "Projects Done",
+      "clients": "Happy Clients"
+    },
+    "about": {
+      "title": "I'm a Software Engineer",
+      "paragraph1": "During my software engineering education I focused on mathematical algorithms, database management, automation and AI. I led JokingSoft-Software and JokingSoft-ARGE teams; we achieved Turkey 3rd place in TEKNOFEST Pre Take Off 2023 defense industry aerospace category.",
+      "paragraph2": "I taught high school students as Software Technologies Instructor at Deneyap Workshops. I keep improving as a developer, follow new technologies and take an active role in various projects to deliver industrial solutions.",
+      "myProjects": "My Projects",
+      "downloadCv": "Download CV",
+      "techLabel": "Technologies I use"
+    },
+    "process": {
+      "title": "My Work Process",
+      "intro1": "I apply research, analysis, design and launch phases carefully in every project. Understanding client needs and delivering user-focused solutions is my priority.",
+      "intro2": "I ensure transparent communication and on-time delivery throughout the process.",
+      "step1": "1. Research",
+      "step1Desc": "I analyse needs and target audience in detail.",
+      "step2": "2. Analysis",
+      "step2Desc": "I evaluate data and determine the best solution.",
+      "step3": "3. Design",
+      "step3Desc": "I design user-friendly interfaces and experiences.",
+      "step4": "4. Launch",
+      "step4Desc": "I test and go live with the project."
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "subtitle": "A selection of websites, apps and UI/UX projects.",
+      "moreProjects": "More Projects"
+    },
+    "cta": {
+      "title": "Have a project idea? Let's talk!",
+      "subtitle": "Let's work together on your website, app or design project. I'm here to deliver solutions that fit your needs.",
+      "button": "Let's work together"
+    },
+    "blogs": {
+      "title": "Blog",
+      "subtitle": "My posts and updates."
+    },
+    "services": {
+      "title": "What I Do",
+      "intro1": "Websites, mobile apps, e-commerce; Python and C# automation, API and backend systems; AI, image processing and data analytics — I deliver solutions across all of these.",
+      "intro2": "I build fast, reliable and scalable applications with modern technologies.",
+      "cta": "Say Hello!",
+      "web": "Web & App Development",
+      "webDesc": "Next.js, React, ASP.NET C# for websites, mobile-friendly interfaces and enterprise apps. UX/UI-focused, scalable solutions.",
+      "automation": "Automation & Backend",
+      "automationDesc": "Python, C#, API and database for automation, web services (SOAP/REST), message queues and backend systems.",
+      "ai": "AI & Image Processing",
+      "aiDesc": "Deep learning, image processing, face/object recognition and data analytics with Python. AI integration and custom models."
+    },
+    "clients": {
+      "title": "Happy Clients",
+      "subtitle": "Brands and projects I've worked with."
+    },
+    "testimonials": {
+      "title": "Testimonials",
+      "subtitle": "Feedback from clients and partners."
+    },
+    "contact": {
+      "title": "Say hello",
+      "subtitle": "Write for questions, ideas or just to say hi. I try to reply soon.",
+      "responseTime": "I usually reply within 24–48 hours.",
+      "location": "Location:",
+      "locationMap": "Open in map",
+      "email": "Email:",
+      "phone": "Phone:",
+      "whatsapp": "Quick contact:",
+      "whatsappLabel": "Message on WhatsApp",
+      "formIntro": "You can reach me by filling the form. I'll get back to you as soon as possible.",
+      "formPrivacy": "Your email and message are used only for contact and are not shared with third parties."
+    }
+  },
+  "footer": {
+    "newsletterLabel": "Stay updated with new posts",
+    "builtWith": "Built with",
+    "copyright": "© 2025 Atakan Güloğlu. All rights reserved.",
+    "adminLogin": "Admin login"
+  },
+  "contactForm": {
+    "name": "Name*",
+    "email": "Email*",
+    "location": "Location",
+    "budget": "Budget*",
+    "subject": "Subject*",
+    "message": "Message*",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Your message has been received.",
+    "error": "Something went wrong.",
+    "errorNetwork": "Connection error. Please check your connection."
+  },
+  "newsletter": {
+    "title": "Stay updated with new posts",
+    "description": "Leave your email and we'll notify you when new posts are published. No spam.",
+    "placeholder": "Your email address",
+    "subscribe": "Subscribe",
+    "subscribing": "Sending…",
+    "success": "You're subscribed to the newsletter.",
+    "error": "Something went wrong.",
+    "errorNetwork": "Connection error. Please try again.",
+    "privacy": "Your email is used only for the newsletter."
+  },
+  "blog": {
+    "title": "Blog",
+    "posts": "Posts",
+    "subtitle": "My posts and updates.",
+    "rss": "Follow via RSS",
+    "searchAndFilter": "Search and filter",
+    "searchPlaceholder": "Search by title or excerpt...",
+    "searchAriaLabel": "Search posts",
+    "sortLabel": "Sort",
+    "sortNewest": "Newest",
+    "sortOldest": "Oldest",
+    "authorLabel": "Author",
+    "allAuthors": "All authors",
+    "clear": "Clear",
+    "postsCount": "{count} posts",
+    "postsTotal": "{count} posts total",
+    "noPosts": "No published posts yet.",
+    "noResults": "No posts match these criteria.",
+    "tryDifferentSearch": "Try a different search term or filter.",
+    "backToAllPosts": "← All posts",
+    "readingTime": "{minutes} min read",
+    "wordsCount": "~{words} words",
+    "wordsCountTitle": "About {words} words",
+    "share": "Share:",
+    "shareOnTwitter": "Share on Twitter",
+    "shareOnLinkedin": "Share on LinkedIn",
+    "shareOnWhatsapp": "Share on WhatsApp",
+    "commentsTitle": "Comments",
+    "noCommentsYet": "No approved comments yet. Be the first to comment.",
+    "commentName": "Your name",
+    "commentEmail": "Email",
+    "commentContent": "Your comment",
+    "commentPlaceholder": "Write your comment...",
+    "commentSubmit": "Post comment",
+    "commentErrorRequired": "Name, email and comment are required.",
+    "commentSuccess": "Your comment was sent. It will be published after approval.",
+    "commentErrorSubmit": "Could not send.",
+    "commentErrorGeneric": "Something went wrong.",
+    "postDefaultTitle": "Post",
+    "homePage": "Home"
+  },
+  "common": {
+    "istanbul": "Istanbul, Turkey"
+  },
+  "workLife": {
+    "page": {
+      "title": "Work Life",
+      "subtitle": "My career and experience in chronological order.",
+      "backLink": "← Back to home"
+    },
+    "modalClose": "Close",
+    "items": [
+      {
+        "year": "2024 – Present",
+        "title": "Software Specialist Assistant",
+        "subtitle": "TMSF (Yaz Bilgi Sistemleri A.Ş.)",
+        "description": "I work on ASP.NET, C#, ABP Framework and AI integrations in the R&D Department. I take an active role in API development, DevOps, RabbitMQ-based messaging and real-time systems with SignalR in corporate projects. I have experience in IIS server management and deployment."
+      },
+      {
+        "year": "June 2024 – October 2024",
+        "title": "Artificial Intelligence Engineering & ASP.NET C# (Internship)",
+        "subtitle": "TMSF (Yaz Bilgi Sistemleri A.Ş.)",
+        "description": "During my internship in ASP.NET C# and web technologies I developed a Docker-based AI server deployment tool and a Turkish AI model. The systems were integrated into .NET Core and ABP Framework for use in corporate projects."
+      },
+      {
+        "year": "2024 – Present",
+        "title": "T3 AI'LE – Domestic AI Project",
+        "subtitle": "T3 Foundation",
+        "description": "I work on data analysis, machine learning and deep learning in Python-based AI projects. I contribute to the development of domestic AI solutions."
+      },
+      {
+        "year": "March 2023 – June 2024",
+        "title": "Software Technologies Instructor (C++)",
+        "subtitle": "T3 Foundation",
+        "description": "I taught C++ programming to 40 high school students. I guided them through exams and projects and introduced them to software and automation technologies."
+      },
+      {
+        "year": "2020 – 2024",
+        "title": "Volunteer Intern Engineer",
+        "subtitle": "T3 Foundation",
+        "description": "I gained hands-on experience in software development and project processes by volunteering in various engineering and software projects."
+      },
+      {
+        "year": "2023",
+        "title": "Automation Systems Intern",
+        "subtitle": "DAC-EL Engineering",
+        "description": "I worked on Siemens, Mitsubishi and Banner-based industrial automation systems. I gained practical experience in PLC and automation software."
+      },
+      {
+        "year": "2023",
+        "title": "Team Founder & Project Manager",
+        "subtitle": "TEKNOFEST Pre Take Off – Turkey 3rd Place",
+        "description": "I was the founder and developer of a project building AI-powered face and object recognition systems. Our project came third in Turkey in the defense industry and aerospace category."
+      },
+      {
+        "year": "2023 – 2024",
+        "title": "Academic Incentive System Developer",
+        "subtitle": "Istanbul Nişantaşı University",
+        "description": "I took part in the analysis, design and development of an academic incentive system with 15,000 active users. The system was built with PHP, Node.js and Angular."
+      }
+    ]
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımda",
+    "workLife": "Çalışma Hayatım",
+    "process": "Süreç",
+    "portfolio": "Portfolyo",
+    "blog": "Blog",
+    "services": "Hizmetler",
+    "contact": "İletişim",
+    "admin": "Admin",
+    "logout": "Çıkış",
+    "login": "Giriş",
+    "menuOpen": "Menüyü aç",
+    "menuClose": "Menüyü kapat"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Merhaba, Ben",
+      "name": "Atakan Güloğlu",
+      "intro": "Yazılım Mühendisiyim. Matematiksel algoritmalar, veritabanı yönetimi, otomasyon ve yapay zeka konularına odaklanıyorum. TEKNOFEST savunma sanayi kategorisinde Türkiye üçüncülüğü, Deneyap'ta eğitmenlik; endüstriyel yazılım projelerinde aktif rol alıyorum.",
+      "cta": "Merhaba De!"
+    },
+    "stats": {
+      "experience": "Deneyim",
+      "projects": "Tamamlanan Proje",
+      "clients": "Mutlu Müşteri"
+    },
+    "about": {
+      "title": "Yazılım Mühendisiyim",
+      "paragraph1": "Yazılım mühendisliği eğitimim süresince matematiksel algoritmalar, veritabanı yönetimi, otomasyon yazılımları ve yapay zeka konularına odaklandım. JokingSoft-Software ve JokingSoft-ARGE takımlarında liderlik yaptım; TEKNOFEST Pre Take Off 2023 savunma sanayi uzay havacılık kategorisinde Türkiye üçüncülüğü elde ettik.",
+      "paragraph2": "Deneyap Atölyeleri'nde Yazılım Teknolojileri Eğitmeni olarak lise öğrencilerine eğitim verdim. Yazılım geliştirici olarak kendimi sürekli geliştiriyor, yeni teknolojileri takip ederek çeşitli projelerde aktif rol alıyor ve endüstriyel çözümler üretmek için çalışıyorum.",
+      "myProjects": "Projelerim",
+      "downloadCv": "CV İndir",
+      "techLabel": "Kullandığım teknolojiler"
+    },
+    "process": {
+      "title": "Çalışma Sürecim",
+      "intro1": "Her projede araştırma, analiz, tasarım ve lansman aşamalarını titizlikle uyguluyorum. Müşteri ihtiyaçlarını anlamak ve kullanıcı odaklı çözümler sunmak önceliğimdir.",
+      "intro2": "Süreç boyunca şeffaf iletişim ve zamanında teslimat sağlıyorum.",
+      "step1": "1. Araştırma",
+      "step1Desc": "İhtiyaçları ve hedef kitleyi detaylı analiz ediyorum.",
+      "step2": "2. Analiz",
+      "step2Desc": "Verileri değerlendirip en uygun çözümü belirliyorum.",
+      "step3": "3. Tasarım",
+      "step3Desc": "Kullanıcı dostu arayüz ve deneyim tasarlıyorum.",
+      "step4": "4. Lansman",
+      "step4Desc": "Projeyi test edip canlıya alıyorum."
+    },
+    "portfolio": {
+      "title": "Portfolyo",
+      "subtitle": "Web siteleri, uygulamalar ve UI/UX projelerimden seçmeler.",
+      "moreProjects": "Daha Fazla Proje"
+    },
+    "cta": {
+      "title": "Proje fikriniz mi var? Birlikte konuşalım!",
+      "subtitle": "Web sitesi, uygulama veya tasarım projeniz için birlikte çalışalım. İhtiyacınıza uygun çözümler üretmek için buradayım.",
+      "button": "Birlikte çalışalım"
+    },
+    "blogs": {
+      "title": "Blog",
+      "subtitle": "Yazılarım ve güncel paylaşımlarım."
+    },
+    "services": {
+      "title": "Neler Yapıyorum?",
+      "intro1": "Web siteleri, mobil uygulamalar, e-ticaret; Python ve C# ile otomasyon, API ve backend sistemleri; yapay zeka, görüntü işleme ve veri analitiği — hepsinde çözüm üretiyorum.",
+      "intro2": "Modern teknolojilerle hızlı, güvenilir ve ölçeklenebilir uygulamalar geliştiriyorum.",
+      "cta": "Merhaba De!",
+      "web": "Web & Uygulama Geliştirme",
+      "webDesc": "Next.js, React, ASP.NET C# ile web siteleri, mobil uyumlu arayüzler ve kurumsal uygulamalar. UX/UI odaklı, ölçeklenebilir çözümler.",
+      "automation": "Otomasyon & Backend",
+      "automationDesc": "Python, C#, API ve veritabanı ile otomasyon yazılımları, web servisleri (SOAP/REST), mesaj kuyrukları ve backend sistemleri.",
+      "ai": "Yapay Zeka & Görüntü İşleme",
+      "aiDesc": "Python ile derin öğrenme, görüntü işleme, yüz/cisim tanıma ve veri analitiği. AI entegrasyonu ve özel modeller."
+    },
+    "clients": {
+      "title": "Mutlu Müşteriler",
+      "subtitle": "Birlikte çalıştığım markalar ve projeler."
+    },
+    "testimonials": {
+      "title": "Referanslar",
+      "subtitle": "Müşterilerimden ve iş ortaklarımdan geri bildirimler."
+    },
+    "contact": {
+      "title": "Merhaba deyin",
+      "subtitle": "Sorularınız, fikirleriniz veya sadece selamlaşmak için yazabilirsiniz. Mesajlarınıza kısa sürede dönmeye çalışıyorum.",
+      "responseTime": "Genellikle 24–48 saat içinde yanıt veriyorum.",
+      "location": "Konum:",
+      "locationMap": "Haritada aç",
+      "email": "E-posta:",
+      "phone": "Telefon:",
+      "whatsapp": "Hızlı iletişim:",
+      "whatsappLabel": "WhatsApp ile yaz",
+      "formIntro": "Formu doldurarak bana ulaşabilirsin. En kısa sürede dönüş yapacağım.",
+      "formPrivacy": "E-posta ve mesajlarınız yalnızca iletişim için kullanılır, üçüncü taraflarla paylaşılmaz."
+    }
+  },
+  "footer": {
+    "newsletterLabel": "Yeni yazılardan haberdar olun",
+    "builtWith": "Built with",
+    "copyright": "© 2025 Atakan Güloğlu. Tüm hakları saklıdır.",
+    "adminLogin": "Admin girişi"
+  },
+  "contactForm": {
+    "name": "Ad*",
+    "email": "E-posta*",
+    "location": "Konum",
+    "budget": "Bütçe*",
+    "subject": "Konu*",
+    "message": "Mesaj*",
+    "send": "Gönder",
+    "sending": "Gönderiliyor...",
+    "success": "Mesajınız alındı.",
+    "error": "Bir hata oluştu.",
+    "errorNetwork": "Bağlantı hatası. Veritabanı ayarlarını kontrol edin."
+  },
+  "newsletter": {
+    "title": "Yeni yazılardan haberdar olun",
+    "description": "E-posta adresinizi bırakın; yeni yazılar yayınlandığında size haber verelim. Spam göndermiyoruz.",
+    "placeholder": "E-posta adresiniz",
+    "subscribe": "Abone ol",
+    "subscribing": "Gönderiliyor…",
+    "success": "Bültene abone oldunuz.",
+    "error": "Bir hata oluştu.",
+    "errorNetwork": "Bağlantı hatası. Lütfen tekrar deneyin.",
+    "privacy": "E-posta adresiniz yalnızca bülten için kullanılır."
+  },
+  "blog": {
+    "title": "Blog",
+    "posts": "Yazılar",
+    "subtitle": "Yazılarım ve güncel paylaşımlarım.",
+    "rss": "RSS ile takip et",
+    "searchAndFilter": "Ara ve filtrele",
+    "searchPlaceholder": "Başlık veya özette ara...",
+    "searchAriaLabel": "Yazı ara",
+    "sortLabel": "Sıralama",
+    "sortNewest": "En yeni",
+    "sortOldest": "En eski",
+    "authorLabel": "Yazar",
+    "allAuthors": "Tüm yazarlar",
+    "clear": "Temizle",
+    "postsCount": "{count} yazı",
+    "postsTotal": "{count} yazı toplam",
+    "noPosts": "Henüz yayınlanmış yazı yok.",
+    "noResults": "Bu kriterlere uygun yazı bulunamadı.",
+    "tryDifferentSearch": "Farklı bir arama terimi veya filtre deneyin.",
+    "backToAllPosts": "← Tüm yazılar",
+    "readingTime": "{minutes} dk okuma",
+    "wordsCount": "~{words} kelime",
+    "wordsCountTitle": "Yaklaşık {words} kelime",
+    "share": "Paylaş:",
+    "shareOnTwitter": "Twitter'da paylaş",
+    "shareOnLinkedin": "LinkedIn'de paylaş",
+    "shareOnWhatsapp": "WhatsApp'ta paylaş",
+    "commentsTitle": "Yorumlar",
+    "noCommentsYet": "Henüz onaylı yorum yok. İlk yorumu siz yazın.",
+    "commentName": "Adınız",
+    "commentEmail": "E-posta",
+    "commentContent": "Yorumunuz",
+    "commentPlaceholder": "Yorumunuzu yazın...",
+    "commentSubmit": "Yorum gönder",
+    "commentErrorRequired": "Ad, e-posta ve yorum alanları zorunludur.",
+    "commentSuccess": "Yorumunuz gönderildi. Onaylandıktan sonra yayınlanacaktır.",
+    "commentErrorSubmit": "Gönderilemedi.",
+    "commentErrorGeneric": "Bir hata oluştu.",
+    "postDefaultTitle": "Yazı",
+    "homePage": "Ana sayfa"
+  },
+  "common": {
+    "istanbul": "İstanbul, Türkiye"
+  },
+  "workLife": {
+    "page": {
+      "title": "Çalışma Hayatım",
+      "subtitle": "Kariyer ve deneyimlerim, tarih sırasıyla.",
+      "backLink": "← Ana sayfaya dön"
+    },
+    "modalClose": "Kapat",
+    "items": [
+      {
+        "year": "2024 – Şimdi",
+        "title": "Yazılım Uzman Yardımcısı",
+        "subtitle": "TMSF (Yaz Bilgi Sistemleri A.Ş.)",
+        "description": "Ar-Ge Departmanında ASP.NET, C#, ABP Framework ve yapay zeka entegrasyonları üzerine çalışıyorum. Kurumsal projelerde API geliştirme, DevOps süreçleri, RabbitMQ tabanlı mesajlaşma ve SignalR ile gerçek zamanlı sistemler üzerinde aktif rol alıyorum. IIS sunucu yönetimi ve deployment süreçlerinde deneyim sahibiyim."
+      },
+      {
+        "year": "Haziran 2024 – Ekim 2024",
+        "title": "Artificial Intelligence Engineering & ASP.NET C# (Staj)",
+        "subtitle": "TMSF (Yaz Bilgi Sistemleri A.Ş.)",
+        "description": "ASP.NET C# ve web teknolojileri üzerine staj sürecimde Docker tabanlı yapay zeka sunucu dağıtım aracı ve Türkçe AI modeli geliştirdim. Geliştirilen sistemler, .NET Core ve ABP Framework altyapılarına entegre edilerek kurumsal projelerde kullanılabilir hale getirildi."
+      },
+      {
+        "year": "2024 – Şimdi",
+        "title": "T3 AI'LE – Yerli Yapay Zeka Projesi",
+        "subtitle": "T3 Vakfı",
+        "description": "Python tabanlı yapay zeka projelerinde veri analizi, makine öğrenimi ve derin öğrenme alanlarında çalışmalar yürütüyorum. Yerli yapay zeka çözümlerinin geliştirilmesine katkı sağlıyorum."
+      },
+      {
+        "year": "Mart 2023 – Haziran 2024",
+        "title": "Yazılım Teknolojileri Eğitmeni (C++)",
+        "subtitle": "T3 Vakfı",
+        "description": "Lise düzeyinde 40 öğrenciye C++ programlama eğitimi verdim. Öğrencilerin yazılım ve otomasyon teknolojileriyle tanışmalarını sağlayarak sınav ve proje süreçlerine rehberlik ettim."
+      },
+      {
+        "year": "2020 – 2024",
+        "title": "Gönüllü Stajyer Mühendis",
+        "subtitle": "T3 Vakfı",
+        "description": "Çeşitli mühendislik ve yazılım projelerinde gönüllü olarak görev alarak yazılım geliştirme ve proje süreçleri hakkında saha deneyimi kazandım."
+      },
+      {
+        "year": "2023",
+        "title": "Otomasyon Sistemleri Stajyeri",
+        "subtitle": "DAC-EL Mühendislik",
+        "description": "Siemens, Mitsubishi ve Banner tabanlı endüstriyel otomasyon sistemleri üzerine çalışmalar gerçekleştirdim. PLC ve otomasyon yazılımlarına yönelik uygulamalı deneyim kazandım."
+      },
+      {
+        "year": "2023",
+        "title": "Takım Kurucusu & Proje Yöneticisi",
+        "subtitle": "TEKNOFEST Pre Take Off – Türkiye 3.'lüğü",
+        "description": "Yapay zeka destekli yüz ve cisim tanıma sistemleri geliştiren projenin kurucusu ve geliştiricisi olarak görev aldım. Projemiz savunma sanayi ve havacılık kategorisinde Türkiye üçüncüsü oldu."
+      },
+      {
+        "year": "2023 – 2024",
+        "title": "Akademik Teşvik Sistemi Geliştiricisi",
+        "subtitle": "İstanbul Nişantaşı Üniversitesi",
+        "description": "15.000 aktif kullanıcısı bulunan akademik teşvik sisteminin analiz, tasarım ve geliştirme süreçlerinde görev aldım. Sistem PHP, Node.js ve Angular teknolojileriyle geliştirildi."
+      }
+    ]
+  }
+}

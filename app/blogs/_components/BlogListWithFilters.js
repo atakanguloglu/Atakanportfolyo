@@ -3,11 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-const SORT_OPTIONS = [
-  { value: "newest", label: "En yeni" },
-  { value: "oldest", label: "En eski" },
-];
+import { useTranslations } from "@/app/_components/I18nProvider";
 
 function normalizeForSearch(str) {
   if (!str) return "";
@@ -18,9 +14,18 @@ function normalizeForSearch(str) {
 }
 
 export default function BlogListWithFilters({ blogs: initialBlogs }) {
+  const { t, locale } = useTranslations();
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("newest");
   const [author, setAuthor] = useState("");
+
+  const SORT_OPTIONS = useMemo(
+    () => [
+      { value: "newest", label: t("blog.sortNewest") },
+      { value: "oldest", label: t("blog.sortOldest") },
+    ],
+    [t]
+  );
 
   const authors = useMemo(() => {
     const set = new Set();
@@ -61,7 +66,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
 
   if (initialBlogs.length === 0) {
     return (
-      <p className="text-center text-gray-500 dark:text-gray-400 py-12">Henüz yayınlanmış yazı yok.</p>
+      <p className="text-center text-gray-500 dark:text-gray-400 py-12">{t("blog.noPosts")}</p>
     );
   }
 
@@ -75,7 +80,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
     <>
       <div className="mb-10 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200/80 dark:border-gray-700 shadow-sm overflow-hidden">
         <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/80">
-          <span className="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Ara ve filtrele</span>
+          <span className="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">{t("blog.searchAndFilter")}</span>
         </div>
         <div className="p-4 sm:p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
@@ -87,9 +92,9 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                 type="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Başlık veya özette ara..."
+                placeholder={t("blog.searchPlaceholder")}
                 className="w-full h-11 pl-11 pr-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/50 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-gray-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition text-sm"
-                aria-label="Yazı ara"
+                aria-label={t("blog.searchAriaLabel")}
               />
             </div>
             <div className="flex flex-wrap items-center gap-3 sm:gap-3">
@@ -97,7 +102,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
                 className="h-11 px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 text-sm font-medium focus:bg-white dark:focus:bg-gray-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition min-w-[120px]"
-                aria-label="Sıralama"
+                aria-label={t("blog.sortLabel")}
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -110,9 +115,9 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
                   className="h-11 px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 text-sm font-medium focus:bg-white dark:focus:bg-gray-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 outline-none transition min-w-[140px]"
-                  aria-label="Yazar"
+                  aria-label={t("blog.authorLabel")}
                 >
-                  <option value="">Tüm yazarlar</option>
+                  <option value="">{t("blog.allAuthors")}</option>
                   {authors.map((a) => (
                     <option key={a} value={a}>
                       {a}
@@ -129,7 +134,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                   }}
                   className="h-11 px-4 rounded-xl text-sm font-medium text-primary-600 hover:text-primary-700 hover:bg-primary-50 transition whitespace-nowrap"
                 >
-                  Temizle
+                  {t("blog.clear")}
                 </button>
               )}
             </div>
@@ -137,11 +142,13 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
           <div className="mt-3 flex items-center justify-between">
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {filteredAndSorted.length === 0
-                ? "Bu kriterlere uygun yazı bulunamadı."
-                : `${filteredAndSorted.length} yazı`}
+                ? t("blog.noResults")
+                : t("blog.postsCount").replace("{count}", String(filteredAndSorted.length))}
             </p>
             {filteredAndSorted.length > 0 && (
-              <span className="text-xs text-gray-400 dark:text-gray-500 font-medium tabular-nums">{initialBlogs.length} yazı toplam</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500 font-medium tabular-nums">
+                {t("blog.postsTotal").replace("{count}", String(initialBlogs.length))}
+              </span>
             )}
           </div>
         </div>
@@ -149,7 +156,7 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
 
       {filteredAndSorted.length === 0 ? (
         <p className="text-center text-gray-500 dark:text-gray-400 py-12">
-          Farklı bir arama terimi veya filtre deneyin.
+          {t("blog.tryDifferentSearch")}
         </p>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
@@ -183,8 +190,8 @@ export default function BlogListWithFilters({ blogs: initialBlogs }) {
                 )}
                 <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
                   {blog.published_at
-                    ? new Date(blog.published_at).toLocaleDateString("tr-TR")
-                    : new Date(blog.created_at).toLocaleDateString("tr-TR")}
+                    ? new Date(blog.published_at).toLocaleDateString(locale === "en" ? "en-GB" : "tr-TR")
+                    : new Date(blog.created_at).toLocaleDateString(locale === "en" ? "en-GB" : "tr-TR")}
                   {blog.author && ` · ${blog.author}`}
                 </p>
               </div>

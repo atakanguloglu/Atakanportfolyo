@@ -1,6 +1,8 @@
+import { cookies } from "next/headers";
 import Link from "next/link";
 import NewsletterForm from "@/app/_components/NewsletterForm";
 import BlogListWithFilters from "./_components/BlogListWithFilters";
+import { getMessages, t, LOCALE_COOKIE, DEFAULT_LOCALE } from "@/app/lib/i18n";
 
 export const metadata = {
   title: "Blog",
@@ -24,26 +26,30 @@ async function getBlogs() {
 
 export default async function BlogsPage() {
   const blogs = await getBlogs();
+  const cookieStore = await cookies();
+  const locale = cookieStore.get(LOCALE_COOKIE)?.value || DEFAULT_LOCALE;
+  const messages = getMessages(locale);
+  const T = (key) => t(messages, key);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-12 lg:py-20">
         <header className="text-center max-w-2xl mx-auto mb-14">
           <p className="text-xs font-medium uppercase tracking-widest text-primary-600 mb-3">
-            Yazılar
+            {T("blog.posts")}
           </p>
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight mb-4">
-            Blog
+            {T("blog.title")}
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
-            Yazılarım ve güncel paylaşımlarım.
+            {T("blog.subtitle")}
           </p>
           <Link
             href="/feed"
             className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 hover:text-primary-700 hover:underline underline-offset-2 transition"
           >
             <span aria-hidden className="text-base">📡</span>
-            RSS ile takip et
+            {T("blog.rss")}
           </Link>
         </header>
 
