@@ -146,3 +146,23 @@ INSERT INTO clients (name, image, sort_order) SELECT 'LinkedIn', 'linkedin.svg',
 INSERT INTO clients (name, image, sort_order) SELECT 'Amazon', 'amazon.svg', 3 WHERE (SELECT COUNT(*) FROM clients) < 4;
 INSERT INTO clients (name, image, sort_order) SELECT 'Medium', 'medium.svg', 4 WHERE (SELECT COUNT(*) FROM clients) < 5;
 INSERT INTO clients (name, image, sort_order) SELECT 'Spotify', 'spotify.svg', 5 WHERE (SELECT COUNT(*) FROM clients) < 6;
+
+-- Site ayarları (tek satır: başlık, meta, iletişim, sosyal linkler)
+CREATE TABLE IF NOT EXISTS site_settings (
+  id              SERIAL PRIMARY KEY,
+  site_title      VARCHAR(255),
+  title_template  VARCHAR(255),
+  meta_description TEXT,
+  contact_email   VARCHAR(255),
+  contact_phone   VARCHAR(50),
+  whatsapp_number VARCHAR(50),
+  linkedin_url    VARCHAR(500),
+  github_url      VARCHAR(500),
+  instagram_url   VARCHAR(500),
+  twitter_url     VARCHAR(500),
+  facebook_url    VARCHAR(500),
+  updated_at      TIMESTAMPTZ DEFAULT NOW()
+);
+INSERT INTO site_settings (id, site_title, title_template, meta_description, contact_email, linkedin_url, github_url, instagram_url)
+SELECT 1, 'Ana Sayfa | Atakan Güloğlu', '%s | Atakan Güloğlu', 'Atakan Güloğlu kişisel portfolyo sitesi. Geliştirici ve tasarımcı projeleri.', 'atakan2100120@gmail.com', 'https://www.linkedin.com/in/atakan-güloğlu-6613331b8/', 'https://github.com/atakanguloglu', 'https://www.instagram.com/atakanguloglu_/'
+WHERE NOT EXISTS (SELECT 1 FROM site_settings WHERE id = 1);

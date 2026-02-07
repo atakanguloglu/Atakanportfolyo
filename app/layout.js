@@ -8,6 +8,7 @@ import LayoutWrapper from "@/app/_components/LayoutWrapper";
 import { ThemeProvider } from "@/app/_components/ThemeProvider";
 import { I18nProvider } from "@/app/_components/I18nProvider";
 import { getMessages, LOCALE_COOKIE, DEFAULT_LOCALE } from "@/app/lib/i18n";
+import { getSiteSettings } from "@/app/lib/site-settings";
 
 // Vercel script'leri sadece Vercel'de çalışır; IIS/kendi sunucuda 404 verir, koşullu render ediyoruz.
 const isVercel = process.env.VERCEL === "1";
@@ -32,76 +33,51 @@ const worksans = Work_Sans({
 
 import "@/app/_styles/globals.css";
 
-export const metadata = {
-  icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
-  },
-  title: {
-    template: "%s | Atakan Güloğlu",
-    default: "Ana Sayfa | Atakan Güloğlu",
-  },
-  description:
-    "Atakan Güloğlu kişisel portfolyo sitesi. Geliştirici ve tasarımcı projeleri.",
-  keywords: [
-    "Atakan Güloğlu",
-    "portfolyo",
-    "kişisel web sitesi",
-    "geliştirici portfolyo",
-    "Next.js",
-    "web geliştirme",
-  ],
-  authors: [
-    { name: "Atakan Güloğlu", url: "https://atakanguloglu.com.tr" },
-  ],
-  creator: "Atakan Güloğlu",
-  publisher: "Atakan Güloğlu",
-  metadataBase: new URL("https://atakanguloglu.com.tr"),
-
-  openGraph: {
-    title: "Ana Sayfa | Atakan Güloğlu",
-    description:
-      "Atakan Güloğlu kişisel portfolyo sitesi. Geliştirici ve tasarımcı projeleri.",
-    url: "https://atakanguloglu.com.tr",
-    siteName: "Atakan Güloğlu Portfolyo",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1920,
-        height: 1005,
-        alt: "Atakan Güloğlu Portfolyo Önizleme",
-      },
+export async function generateMetadata() {
+  const s = await getSiteSettings();
+  const title = s.site_title || "Ana Sayfa | Atakan Güloğlu";
+  const desc = s.meta_description || "Atakan Güloğlu kişisel portfolyo sitesi. Geliştirici ve tasarımcı projeleri.";
+  const template = s.title_template || "%s | Atakan Güloğlu";
+  return {
+    icons: { icon: "/logo.png", apple: "/logo.png" },
+    title: { template, default: title },
+    description: desc,
+    keywords: [
+      "Atakan Güloğlu",
+      "portfolyo",
+      "kişisel web sitesi",
+      "geliştirici portfolyo",
+      "Next.js",
+      "web geliştirme",
     ],
-    locale: "tr_TR",
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Ana Sayfa | Atakan Güloğlu",
-    description: "Atakan Güloğlu çalışmalarım",
-    creator: "@atakan_guloglu",
-    images: ["/og-image.jpg"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    authors: [{ name: "Atakan Güloğlu", url: "https://atakanguloglu.com.tr" }],
+    creator: "Atakan Güloğlu",
+    publisher: "Atakan Güloğlu",
+    metadataBase: new URL("https://atakanguloglu.com.tr"),
+    openGraph: {
+      title,
+      description: desc,
+      url: "https://atakanguloglu.com.tr",
+      siteName: "Atakan Güloğlu Portfolyo",
+      images: [{ url: "/og-image.jpg", width: 1920, height: 1005, alt: "Atakan Güloğlu Portfolyo Önizleme" }],
+      locale: "tr_TR",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: desc,
+      creator: "@atakan_guloglu",
+      images: ["/og-image.jpg"],
+    },
+    robots: {
       index: true,
       follow: true,
-      maxVideoPreview: -1,
-      maxImagePreview: "large",
-      maxSnippet: -1,
+      googleBot: { index: true, follow: true, maxVideoPreview: -1, maxImagePreview: "large", maxSnippet: -1 },
     },
-  },
-
-  alternates: {
-    types: {
-      "application/rss+xml": "/feed",
-    },
-  },
-};
+    alternates: { types: { "application/rss+xml": "/feed" } },
+  };
+}
 
 export default async function RootLayout({ children }) {
   const cookieStore = await cookies();

@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useTranslations } from "@/app/_components/I18nProvider";
 
 const CONSENT_KEY = "cookie_consent";
 
 export default function CookieConsentBar() {
+  const { t } = useTranslations();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -28,14 +31,17 @@ export default function CookieConsentBar() {
     >
       <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-6xl">
         <p className="text-sm text-gray-700 dark:text-gray-300 text-center sm:text-left">
-          Çerezler ve benzeri teknolojiler kullanılmaktadır. Siteyi kullanmaya devam ederek kabul etmiş olursunuz.
+          {t("cookieBar.text")}{" "}
+          <Link href="/gizlilik" className="text-primary-600 dark:text-primary-400 hover:underline no-underline">
+            {t("cookieBar.learnMore")}
+          </Link>
         </p>
         <button
           type="button"
           onClick={accept}
           className="flex-shrink-0 px-5 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white text-sm font-medium transition-colors"
         >
-          Kabul Et
+          {t("cookieBar.accept")}
         </button>
       </div>
     </div>

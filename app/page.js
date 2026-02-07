@@ -10,7 +10,10 @@ import Portfolio from "./_components/Portfolio";
 import TechLogosBackground from "./_components/TechLogosBackground";
 import { getAuthFromRequest } from "@/app/lib/auth-request";
 import { getSiteProfileImageUrl } from "@/app/lib/site-profile";
+import { getSiteSettings } from "@/app/lib/site-settings";
 import { getMessages, t, LOCALE_COOKIE, DEFAULT_LOCALE } from "@/app/lib/i18n";
+
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://atakanguloglu.com.tr";
 
 import { Button } from "primereact/button";
 
@@ -26,13 +29,28 @@ import {
 export default async function Home() {
   const auth = await getAuthFromRequest();
   const profileImage = await getSiteProfileImageUrl();
+  const settings = await getSiteSettings();
   const cookieStore = await cookies();
   const locale = cookieStore.get(LOCALE_COOKIE)?.value || DEFAULT_LOCALE;
   const messages = getMessages(locale);
   const T = (key) => t(messages, key);
 
+  const personImage = profileImage.startsWith("http") ? profileImage : `${SITE_URL}${profileImage.startsWith("/") ? profileImage : "/" + profileImage}`;
+  const sameAs = [settings.linkedin_url, settings.github_url, settings.instagram_url, settings.twitter_url, settings.facebook_url].filter(Boolean);
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Atakan Güloğlu",
+    url: SITE_URL,
+    image: personImage,
+    jobTitle: locale === "en" ? "Software Engineer" : "Yazılım Mühendisi",
+    description: settings.meta_description || (locale === "en" ? "Software engineer portfolio and blog." : "Yazılım mühendisi portfolyo ve blog sitesi."),
+    ...(sameAs.length > 0 && { sameAs }),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       <div
         className="relative overflow-hidden pt-6 sm:pt-8 lg:pt-32 bg-gradient-to-bl from-primary-50/80 via-white to-primary-100/80 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800"
         id="home"
@@ -103,45 +121,50 @@ export default async function Home() {
                   priority
                 />
                 <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-9 flex gap-1 bg-white dark:bg-gray-800 w-auto mx-auto p-3 rounded shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] dark:border dark:border-gray-600">
-                  <Link
-                    href="#"
-                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
-                  >
-                    <i className="pi pi-facebook group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                  </Link>
-                  <Link
-                    href="https://www.linkedin.com/in/atakan-g%C3%BClo%C4%9Flu-6613331b8/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500 "
-                    title="LinkedIn"
-                  >
-                    <i className="pi pi-linkedin group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                  </Link>
-                  <Link
-                    href="https://www.instagram.com/atakanguloglu_/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500 "
-                    title="Instagram"
-                  >
-                    <i className="pi pi-instagram group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                  </Link>
-                  <Link
-                    href="https://github.com/atakanguloglu"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500 "
-                    title="GitHub"
-                  >
-                    <i className="pi pi-github group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                  </Link>
-                  <Link
-                    href="#"
-                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500 "
-                  >
-                    <i className="pi pi-pinterest group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                  </Link>
+                  {settings.facebook_url && (
+                    <Link
+                      href={settings.facebook_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
+                      title="Facebook"
+                    >
+                      <i className="pi pi-facebook group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                    </Link>
+                  )}
+                  {settings.linkedin_url && (
+                    <Link
+                      href={settings.linkedin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500 "
+                      title="LinkedIn"
+                    >
+                      <i className="pi pi-linkedin group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                    </Link>
+                  )}
+                  {settings.instagram_url && (
+                    <Link
+                      href={settings.instagram_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500 "
+                      title="Instagram"
+                    >
+                      <i className="pi pi-instagram group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                    </Link>
+                  )}
+                  {settings.github_url && (
+                    <Link
+                      href={settings.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500 "
+                      title="GitHub"
+                    >
+                      <i className="pi pi-github group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -428,81 +451,93 @@ export default async function Home() {
                     <span className="text-xs text-gray-500 dark:text-gray-400"> — {T("home.contact.locationMap")}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg hover:border-primary-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5">
-                  <div className="flex justify-center items-center p-3 rounded group-hover:bg-primary-500 bg-primary-100 dark:bg-gray-700">
-                    <i className="pi pi-at group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                {settings.contact_email && (
+                  <div className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg hover:border-primary-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5">
+                    <div className="flex justify-center items-center p-3 rounded group-hover:bg-primary-500 bg-primary-100 dark:bg-gray-700">
+                      <i className="pi pi-at group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                    </div>
+                    <div>
+                      <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.email")}</div>
+                      <Link
+                        href={`mailto:${settings.contact_email}`}
+                        className="text-gray-900 dark:text-white font-medium mt-1 hover:text-primary-600 hover:underline no-underline block"
+                      >
+                        {settings.contact_email}
+                      </Link>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.email")}</div>
-                    <Link
-                      href="mailto:atakan2100120@gmail.com"
-                      className="text-gray-900 dark:text-white font-medium mt-1 hover:text-primary-600 hover:underline no-underline block"
-                    >
-                      atakan2100120@gmail.com
-                    </Link>
-                  </div>
-                </div>
+                )}
                 {auth && (
                   <>
-                    <div className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg hover:border-primary-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5">
-                      <div className="flex justify-center items-center p-3 rounded group-hover:bg-primary-500 bg-primary-100 dark:bg-gray-700">
-                        <i className="pi pi-phone group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                    {settings.contact_phone && (
+                      <div className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg hover:border-primary-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5">
+                        <div className="flex justify-center items-center p-3 rounded group-hover:bg-primary-500 bg-primary-100 dark:bg-gray-700">
+                          <i className="pi pi-phone group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.phone")}</div>
+                          <Link
+                            href={`tel:${settings.contact_phone.replace(/\s/g, "")}`}
+                            className="text-gray-900 dark:text-white font-medium mt-1 hover:text-primary-600 hover:underline no-underline block"
+                          >
+                            {settings.contact_phone}
+                          </Link>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.phone")}</div>
-                        <Link
-                          href="tel:+905380803023"
-                          className="text-gray-900 dark:text-white font-medium mt-1 hover:text-primary-600 hover:underline no-underline block"
-                        >
-                          +90 538 080 30 23
-                        </Link>
-                      </div>
-                    </div>
-                    <Link
-                      href="https://wa.me/905380803023"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-green-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5 no-underline"
-                    >
-                      <div className="flex justify-center items-center p-3 rounded bg-green-100 dark:bg-gray-700 group-hover:bg-green-500">
-                        <i className="pi pi-whatsapp group-hover:text-white text-green-600 dark:text-green-400 text-2xl leading-none"></i>
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.whatsapp")}</div>
-                        <span className="text-gray-900 dark:text-white font-medium mt-1 block">{T("home.contact.whatsappLabel")}</span>
-                      </div>
-                    </Link>
+                    )}
+                    {settings.whatsapp_number && (
+                      <Link
+                        href={`https://wa.me/${settings.whatsapp_number.replace(/\D/g, "")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 group hover:bg-white dark:hover:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-green-500 hover:shadow-[0_12px_64px_0_rgba(28,25,25,0.12)] p-6 lg:w-4/5 no-underline"
+                      >
+                        <div className="flex justify-center items-center p-3 rounded bg-green-100 dark:bg-gray-700 group-hover:bg-green-500">
+                          <i className="pi pi-whatsapp group-hover:text-white text-green-600 dark:text-green-400 text-2xl leading-none"></i>
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-gray-700 dark:text-gray-300 text-sm">{T("home.contact.whatsapp")}</div>
+                          <span className="text-gray-900 dark:text-white font-medium mt-1 block">{T("home.contact.whatsappLabel")}</span>
+                        </div>
+                      </Link>
+                    )}
                   </>
                 )}
               </div>
               <div className="flex gap-1 mt-8">
-                <Link
-                  href="https://www.linkedin.com/in/atakan-g%C3%BClo%C4%9Flu-6613331b8/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
-                  title="LinkedIn"
-                >
-                  <i className="pi pi-linkedin group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                </Link>
-                <Link
-                  href="https://github.com/atakanguloglu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
-                  title="GitHub"
-                >
-                  <i className="pi pi-github group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                </Link>
-                <Link
-                  href="https://www.instagram.com/atakanguloglu_/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
-                  title="Instagram"
-                >
-                  <i className="pi pi-instagram group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
-                </Link>
+                {settings.linkedin_url && (
+                  <Link
+                    href={settings.linkedin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
+                    title="LinkedIn"
+                  >
+                    <i className="pi pi-linkedin group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                  </Link>
+                )}
+                {settings.github_url && (
+                  <Link
+                    href={settings.github_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
+                    title="GitHub"
+                  >
+                    <i className="pi pi-github group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                  </Link>
+                )}
+                {settings.instagram_url && (
+                  <Link
+                    href={settings.instagram_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex justify-center items-center p-3 no-underline rounded group hover:bg-primary-500"
+                    title="Instagram"
+                  >
+                    <i className="pi pi-instagram group-hover:text-white text-primary-500 dark:text-primary-200 text-2xl leading-none"></i>
+                  </Link>
+                )}
               </div>
             </div>
             <div className="pl-0">

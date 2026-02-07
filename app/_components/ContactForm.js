@@ -19,6 +19,7 @@ export default function ContactForm() {
     budget: "",
     subject: "",
     message: "",
+    website: "", // honeypot: botlar doldurur, boş kalmalı
   });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -41,7 +42,7 @@ export default function ContactForm() {
       const data = await res.json();
       if (res.ok) {
         setResult({ type: "success", text: data.message || t("contactForm.success") });
-        setForm({ name: "", email: "", location: "", budget: "", subject: "", message: "" });
+        setForm({ name: "", email: "", location: "", budget: "", subject: "", message: "", website: "" });
       } else {
         setResult({ type: "error", text: data.error || t("contactForm.error") });
       }
@@ -54,6 +55,19 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="p-fluid flex flex-col gap-2 pl-0 -ml-2 max-w-full">
+      {/* Honeypot: ekran dışında, botlar doldurur; dolu gelirse API reddeder */}
+      <div className="absolute -left-[9999px] top-0 w-1 h-1 overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-website">Web siteniz</label>
+        <input
+          id="contact-website"
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={(e) => handleChange("website", e.target.value)}
+        />
+      </div>
       <InputText
         className={inputClass}
         placeholder={t("contactForm.name")}

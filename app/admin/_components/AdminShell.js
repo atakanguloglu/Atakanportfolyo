@@ -1,15 +1,26 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import AdminSidebar from "./AdminSidebar";
 import AdminUserMenu from "./AdminUserMenu";
 import ThemeToggle from "@/app/_components/ThemeToggle";
 
 export default function AdminShell({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isLoginPage = pathname === "/admin/login";
+
+  useEffect(() => {
+    if (isLoginPage) return;
+    fetch("/api/auth/me", { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.loggedIn) router.replace("/admin/login");
+      })
+      .catch(() => router.replace("/admin/login"));
+  }, [isLoginPage, router]);
 
   if (isLoginPage) {
     return <>{children}</>;

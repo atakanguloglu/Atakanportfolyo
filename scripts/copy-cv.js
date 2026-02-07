@@ -23,4 +23,3 @@ if (!fs.existsSync(sourcePath)) {
 }
 
 fs.copyFileSync(sourcePath, destPath);
-console.log("CV kopyalandı:", destPath);

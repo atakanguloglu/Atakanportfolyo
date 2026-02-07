@@ -100,15 +100,19 @@ export default async function BlogPostPage({ params }) {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(shareTitle + " " + shareUrl)}`,
   };
 
+  const articleImage = blog.image_url
+    ? (blog.image_url.startsWith("http") ? blog.image_url : `${SITE_URL}${blog.image_url.startsWith("/") ? "" : "/"}${blog.image_url}`)
+    : `${SITE_URL}/og-image.jpg`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: blog.title,
-    description: blog.excerpt || (blog.content ? blog.content.replace(/<[^>]+>/g, "").slice(0, 160) : ""),
-    image: blog.image_url ? (blog.image_url.startsWith("http") ? blog.image_url : `${SITE_URL}${blog.image_url.startsWith("/") ? "" : "/"}${blog.image_url}`) : `${SITE_URL}/og-image.jpg`,
+    description: (blog.excerpt || (blog.content ? blog.content.replace(/<[^>]+>/g, "").slice(0, 160) : "") || blog.title).slice(0, 200),
+    image: articleImage,
+    url: `${SITE_URL}/blogs/${slug}`,
     datePublished: blog.published_at || blog.created_at,
     dateModified: blog.updated_at || blog.published_at || blog.created_at,
-    author: { "@type": "Person", name: blog.author || "Atakan Güloğlu" },
+    author: { "@type": "Person", name: blog.author || "Atakan Güloğlu", url: SITE_URL },
     publisher: { "@type": "Organization", name: "Atakan Güloğlu", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blogs/${slug}` },
     wordCount: words,

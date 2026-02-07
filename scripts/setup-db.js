@@ -57,11 +57,11 @@ async function run() {
 
     for (const statement of statements) {
       await client.query(statement + ";");
-      console.log("[db:setup] Tablo/şema güncellendi.");
     }
     // Mevcut kurulumlarda users tablosuna avatar_url ekle (yoksa)
     await client.query("ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url VARCHAR(500);");
-    console.log("[db:setup] Bitti. Tablolar hazır.");
+    await client.query("ALTER TABLE users ADD COLUMN IF NOT EXISTS token_version INT DEFAULT 0;");
+    process.stdout.write("DB kurulumu tamamlandı.\n");
   } catch (err) {
     console.error("[db:setup] Hata:", err.message);
     if (err.code === "ECONNREFUSED") {

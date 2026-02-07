@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "@/app/_components/I18nProvider";
 
@@ -14,7 +14,10 @@ export default function Page() {
   const pathname = usePathname();
   const { t } = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
+  const userMenuRef = useRef(null);
   const [activeSection, setActiveSection] = useState("home");
 
   const isBlog = pathname === "/blogs" || pathname?.startsWith("/blogs/");
@@ -23,10 +26,24 @@ export default function Page() {
 
   useEffect(() => {
     fetch("/api/auth/me", { credentials: "include" })
-      .then((res) => (res.ok ? res.json() : { loggedIn: false }))
-      .then((data) => setIsLoggedIn(!!data.loggedIn))
-      .catch(() => setIsLoggedIn(false));
+      .then((res) => (res.ok ? res.json() : {}))
+      .then((data) => {
+        if (data.loggedIn && data.user) setUser(data.user);
+        else setUser(null);
+        setAvatarError(false);
+      })
+      .catch(() => setUser(null));
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) setUserMenuOpen(false);
+    }
+    if (userMenuOpen) {
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
+    }
+  }, [userMenuOpen]);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -47,8 +64,9 @@ export default function Page() {
   }, [pathname]);
 
   const handleLogout = async () => {
+    setUserMenuOpen(false);
     await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
-    setIsLoggedIn(false);
+    setUser(null);
     router.refresh();
   };
 
@@ -92,22 +110,84 @@ export default function Page() {
         >
           {t("nav.contact")}
         </Link>
-        {isLoggedIn ? (
-          <>
-            <Link
-              href="/admin"
-              className="p-button font-bold no-underline border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-primary-50 hover:border-primary-600 hover:text-primary-600 dark:text-primary-300 dark:border-primary-400 dark:hover:bg-primary-500/20 dark:hover:text-primary-200 dark:hover:border-primary-400"
-            >
-              {t("nav.admin")}
-            </Link>
+        {user ? (
+          <div className="relative flex items-center" ref={userMenuRef}>
             <button
               type="button"
-              onClick={handleLogout}
-              className="p-button font-bold no-underline border-2 border-gray-300 dark:border-gray-500 text-gray-600 dark:text-gray-200 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-400 rounded"
+              onClick={() => setUserMenuOpen((o) => !o)}
+              className={`flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-xl border bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 transition-all duration-200 ${
+                userMenuOpen
+                  ? "border-primary-300 dark:border-primary-500 shadow-md ring-2 ring-primary-500/10"
+                  : "border-gray-200 dark:border-gray-600 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:border-gray-300 dark:hover:border-gray-500 hover:shadow"
+              }`}
+              aria-expanded={userMenuOpen}
+              aria-haspopup="true"
             >
-              {t("nav.logout")}
+              {user.avatar_url && !avatarError ? (
+                <span className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 bg-gray-200 dark:bg-gray-600">
+                  <img
+                    src={user.avatar_url}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={() => setAvatarError(true)}
+                  />
+                </span>
+              ) : (
+                <span className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-semibold text-sm shadow-inner shrink-0">
+                  {(user.display_name || user.username || "A").charAt(0).toUpperCase()}
+                </span>
+              )}
+              <span className="text-sm font-medium text-gray-800 dark:text-gray-200 max-w-[120px] truncate">
+                {user.display_name || user.username}
+              </span>
+              <svg
+                className={`w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0 transition-transform duration-200 ${userMenuOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
             </button>
-          </>
+            {userMenuOpen && (
+              <div
+                className="absolute right-0 top-full mt-2 py-1.5 w-52 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 shadow-xl z-[9999] overflow-hidden"
+                role="menu"
+              >
+                <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/80">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t("nav.loggedIn")}</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white truncate mt-0.5">{user.display_name || user.username}</p>
+                </div>
+                <Link
+                  href="/admin/profile"
+                  onClick={() => setUserMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-500/20 no-underline transition-colors"
+                  role="menuitem"
+                >
+                  <i className="pi pi-user text-primary-500 dark:text-primary-400" />
+                  {t("nav.profile")}
+                </Link>
+                <Link
+                  href="/admin"
+                  onClick={() => setUserMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-500/20 no-underline transition-colors"
+                  role="menuitem"
+                >
+                  <i className="pi pi-cog text-primary-500 dark:text-primary-400" />
+                  {t("nav.admin")}
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/20 transition-colors"
+                  role="menuitem"
+                >
+                  <i className="pi pi-sign-out" />
+                  {t("nav.logout")}
+                </button>
+              </div>
+            )}
+          </div>
         ) : (
           <Link
             href="/admin/login"
@@ -173,17 +253,24 @@ export default function Page() {
               <Link href="/#contact" onClick={closeMenu} className={`flex items-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation ${isHome && activeSection === "contact" ? "text-primary-600 dark:text-primary-400 font-bold bg-primary-50 dark:bg-primary-500/20" : "text-gray-950 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"}`}>
                 {t("nav.contact")}
               </Link>
-              {isLoggedIn ? (
+              {user ? (
                 <>
-                  <Link href="/admin" onClick={closeMenu} className="flex items-center justify-center min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation border-2 border-primary-500 text-primary-500 font-bold mx-2 mt-1">
-                    {t("nav.admin")}
+                  <div className="px-4 py-3 border-t border-gray-100 dark:border-gray-700 mt-2">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t("nav.loggedIn")}</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white truncate mt-0.5">{user.display_name || user.username}</p>
+                  </div>
+                  <Link href="/admin/profile" onClick={closeMenu} className="flex items-center gap-3 min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-500/20">
+                    <i className="pi pi-user text-primary-500 dark:text-primary-400" /> {t("nav.profile")}
+                  </Link>
+                  <Link href="/admin" onClick={closeMenu} className="flex items-center gap-3 min-h-[48px] px-4 py-3 rounded-lg no-underline touch-manipulation text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-500/20">
+                    <i className="pi pi-cog text-primary-500 dark:text-primary-400" /> {t("nav.admin")}
                   </Link>
                   <button
                     type="button"
                     onClick={() => { closeMenu(); handleLogout(); }}
-                    className="flex items-center justify-center min-h-[48px] w-full px-4 py-3 rounded-lg no-underline touch-manipulation border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-bold bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 active:bg-gray-100 dark:active:bg-gray-600 mx-2 mt-1"
+                    className="flex items-center gap-3 w-full min-h-[48px] px-4 py-3 rounded-lg text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/20 touch-manipulation"
                   >
-                    {t("nav.logout")}
+                    <i className="pi pi-sign-out" /> {t("nav.logout")}
                   </button>
                 </>
               ) : (

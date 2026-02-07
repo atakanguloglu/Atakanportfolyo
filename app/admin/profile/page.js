@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
@@ -10,6 +11,7 @@ import { Password } from "primereact/password";
 const DEFAULT_AVATAR = "/profile.png";
 
 export default function AdminProfilePage() {
+  const router = useRouter();
   const fileInputRef = useRef(null);
 
   const [profile, setProfile] = useState({ display_name: "", avatar_url: "" });
@@ -28,6 +30,8 @@ export default function AdminProfilePage() {
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [avatarUploading, setAvatarUploading] = useState(false);
+
+  const [logoutAllLoading, setLogoutAllLoading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -196,8 +200,8 @@ export default function AdminProfilePage() {
               </p>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-6 items-start">
-              <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+              <div className="flex flex-col items-center gap-3 w-full sm:w-auto">
                 <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-700">
                   <Image
                     src={avatarDisplayUrl}
@@ -320,6 +324,35 @@ export default function AdminProfilePage() {
                 className="bg-primary-500 hover:bg-primary-600 border-primary-500"
               />
             </form>
+          </section>
+
+          {/* Tüm oturumları sonlandır */}
+          <section className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Güvenlik</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+              Tüm cihazlardan (bilgisayar, telefon vb.) çıkış yapar. Bu cihaz dahil tekrar giriş yapmanız gerekir.
+            </p>
+            <Button
+              type="button"
+              label="Tüm oturumları sonlandır"
+              icon="pi pi-sign-out"
+              loading={logoutAllLoading}
+              disabled={logoutAllLoading}
+              className="p-button-outlined p-button-warning"
+              onClick={async () => {
+                if (!confirm("Tüm cihazlardan çıkış yapılacak. Devam edilsin mi?")) return;
+                setLogoutAllLoading(true);
+                try {
+                  const res = await fetch("/api/auth/logout-all", { method: "POST", credentials: "include" });
+                  if (res.ok) {
+                    router.push("/admin/login");
+                    router.refresh();
+                  }
+                } finally {
+                  setLogoutAllLoading(false);
+                }
+              }}
+            />
           </section>
         </div>
       )}

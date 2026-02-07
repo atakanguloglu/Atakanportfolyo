@@ -59,9 +59,7 @@ async function run() {
     );
 
     if (res.rowCount > 0) {
-      console.log("[db:seed] Admin kullanıcı oluşturuldu. Kullanıcı adı:", username, "Şifre:", password);
     } else {
-      console.log("[db:seed] Admin zaten var. Kullanıcı adı:", username);
     }
   } catch (err) {
     console.error("[db:seed] Hata:", err.message);

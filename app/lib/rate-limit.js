@@ -4,7 +4,7 @@
  */
 
 const store = new Map();
-const WINDOW_MS = 60 * 1000; // 1 dakika
+const DEFAULT_WINDOW_MS = 60 * 1000; // 1 dakika
 
 function getClientKey(request, routeId) {
   const forwarded = request.headers.get("x-forwarded-for");
@@ -20,25 +20,26 @@ function cleanup() {
 }
 
 /**
- * Limit aşıldıysa { limited: true } döner; aşılmadıysa { limited: false }.
+ * Limit aşıldıysa { limited: true, retryAfter? } döner; aşılmadıysa { limited: false }.
  * @param {Request} request - Next.js request
  * @param {string} routeId - Örn. "login", "contact", "comment"
  * @param {number} maxRequests - Pencere başına max istek (örn. 5)
+ * @param {number} [windowMs] - Pencere süresi (ms). Varsayılan 1 dk; login için 15 dk kullanılabilir.
  */
-export function checkRateLimit(request, routeId, maxRequests = 5) {
+export function checkRateLimit(request, routeId, maxRequests = 5, windowMs = DEFAULT_WINDOW_MS) {
   cleanup();
   const key = getClientKey(request, routeId);
   const now = Date.now();
   let data = store.get(key);
 
   if (!data) {
-    data = { count: 0, resetAt: now + WINDOW_MS };
+    data = { count: 0, resetAt: now + windowMs };
     store.set(key, data);
   }
 
   if (now >= data.resetAt) {
     data.count = 0;
-    data.resetAt = now + WINDOW_MS;
+    data.resetAt = now + windowMs;
   }
 
   data.count += 1;

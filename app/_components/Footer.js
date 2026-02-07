@@ -61,6 +61,10 @@ export default function Page() {
             RSS
           </Link>
           <span className="hidden sm:inline text-gray-600">·</span>
+          <Link href="/gizlilik" className="text-gray-500 dark:text-gray-400 hover:text-gray-300 dark:hover:text-gray-300 no-underline">
+            {t("footer.privacy")}
+          </Link>
+          <span className="hidden sm:inline text-gray-600">·</span>
           <Link href="/admin/login" className="text-gray-500 dark:text-gray-400 hover:text-gray-300 no-underline">
             {t("footer.adminLogin")}
           </Link>

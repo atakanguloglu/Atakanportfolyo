@@ -11,6 +11,8 @@
     "admin": "Admin",
     "logout": "Çıkış",
     "login": "Giriş",
+    "loggedIn": "Giriş yapıldı",
+    "profile": "Profil",
     "menuOpen": "Menüyü aç",
     "menuClose": "Menüyü kapat"
   },
@@ -99,7 +101,24 @@
     "newsletterLabel": "Yeni yazılardan haberdar olun",
     "builtWith": "Built with",
     "copyright": "© 2025 Atakan Güloğlu. Tüm hakları saklıdır.",
-    "adminLogin": "Admin girişi"
+    "adminLogin": "Admin girişi",
+    "privacy": "Gizlilik ve Çerezler"
+  },
+  "cookieBar": {
+    "text": "Çerezler ve benzeri teknolojiler kullanılmaktadır. Siteyi kullanmaya devam ederek kabul etmiş olursunuz.",
+    "accept": "Kabul Et",
+    "learnMore": "Daha fazla bilgi"
+  },
+  "privacyPage": {
+    "title": "Gizlilik ve Çerezler",
+    "intro": "Bu sayfa, sitede toplanan veriler ve çerez kullanımı hakkında kısa bilgi içerir.",
+    "data": "Toplanan veriler",
+    "dataText": "İletişim formu ile gönderdiğiniz ad, e-posta ve mesaj yalnızca iletişim amacıyla saklanır. Bülten aboneliğiniz yalnızca e-posta adresinizi içerir. Bu veriler üçüncü taraflarla paylaşılmaz.",
+    "cookies": "Çerezler",
+    "cookiesText": "Site, oturum ve tercihlerinizi (dil, tema) hatırlamak için çerez kullanır. Ziyaret istatistikleri yalnızca site sahibi tarafından görüntülenir. Çerez çubuğundan \"Kabul Et\" diyerek onay verebilirsiniz.",
+    "rights": "Haklarınız",
+    "rightsText": "Kişisel verilerinize erişim, düzeltme veya silme talebinde bulunmak için iletişim bölümünden bize yazabilirsiniz.",
+    "backHome": "Ana sayfaya dön"
   },
   "contactForm": {
     "name": "Ad*",

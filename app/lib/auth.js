@@ -16,7 +16,8 @@ export function verifyPassword(password, hash) {
 }
 
 export async function createToken(payload) {
-  return new SignJWT(payload)
+  const { userId, username, tokenVersion = 0 } = payload;
+  return new SignJWT({ userId, username, tokenVersion })
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime("7d")
     .setIssuedAt()

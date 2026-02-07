@@ -21,7 +21,11 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { name, email, location, budget, subject, message } = body;
+    const { name, email, location, budget, subject, message, website } = body;
+
+    if (website?.trim()) {
+      return NextResponse.json({ success: true, message: "Mesajınız alındı." });
+    }
 
     if (!name?.trim() || !email?.trim()) {
       return NextResponse.json(

@@ -11,6 +11,8 @@
     "admin": "Admin",
     "logout": "Logout",
     "login": "Login",
+    "loggedIn": "Logged in",
+    "profile": "Profile",
     "menuOpen": "Open menu",
     "menuClose": "Close menu"
   },
@@ -99,7 +101,24 @@
     "newsletterLabel": "Stay updated with new posts",
     "builtWith": "Built with",
     "copyright": "© 2025 Atakan Güloğlu. All rights reserved.",
-    "adminLogin": "Admin login"
+    "adminLogin": "Admin login",
+    "privacy": "Privacy & Cookies"
+  },
+  "cookieBar": {
+    "text": "We use cookies and similar technologies. By continuing to use the site you accept this.",
+    "accept": "Accept",
+    "learnMore": "Learn more"
+  },
+  "privacyPage": {
+    "title": "Privacy & Cookies",
+    "intro": "This page provides a brief overview of data collected on this site and cookie usage.",
+    "data": "Data we collect",
+    "dataText": "Name, email and message sent via the contact form are stored only for replying to you. Newsletter subscription stores only your email address. This data is not shared with third parties.",
+    "cookies": "Cookies",
+    "cookiesText": "The site uses cookies to remember your session and preferences (language, theme). Visit statistics are only visible to the site owner. You can consent via the cookie bar by clicking \"Accept\".",
+    "rights": "Your rights",
+    "rightsText": "You may contact us through the contact section to request access, correction or deletion of your personal data.",
+    "backHome": "Back to home"
   },
   "contactForm": {
     "name": "Name*",

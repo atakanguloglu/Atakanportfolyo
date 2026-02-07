@@ -9,7 +9,6 @@ const root = path.join(__dirname, "..");
 const standalone = path.join(root, ".next", "standalone");
 
 if (!fs.existsSync(standalone)) {
-  console.log("Standalone klasörü yok (önce npm run build çalıştırın).");
   process.exit(0);
 }
 
@@ -32,7 +31,6 @@ const publicSrc = path.join(root, "public");
 const publicDest = path.join(standalone, "public");
 if (fs.existsSync(publicSrc)) {
   copyDir(publicSrc, publicDest);
-  console.log("Kopyalandı: public -> .next/standalone/public");
 }
 
 // .next/static -> standalone/.next/static
@@ -40,7 +38,5 @@ const staticSrc = path.join(root, ".next", "static");
 const staticDest = path.join(standalone, ".next", "static");
 if (fs.existsSync(staticSrc)) {
   copyDir(staticSrc, staticDest);
-  console.log("Kopyalandı: .next/static -> .next/standalone/.next/static");
 }
 
-console.log("Standalone hazır. Sunucuda: cd .next/standalone && node server.js");

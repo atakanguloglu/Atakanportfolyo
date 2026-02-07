@@ -3,14 +3,15 @@ import { query } from "@/app/lib/db";
 import { verifyPassword, createToken, getAuthCookieName, getAuthCookieOptions } from "@/app/lib/auth";
 import { checkRateLimit } from "@/app/lib/rate-limit";
 
-const LOGIN_MAX_PER_MINUTE = 5;
+const LOGIN_MAX_ATTEMPTS = 5;
+const LOGIN_WINDOW_MS = 15 * 60 * 1000; // 15 dakika
 
 export async function POST(request) {
   try {
-    const limit = checkRateLimit(request, "login", LOGIN_MAX_PER_MINUTE);
+    const limit = checkRateLimit(request, "login", LOGIN_MAX_ATTEMPTS, LOGIN_WINDOW_MS);
     if (limit.limited) {
       return NextResponse.json(
-        { success: false, error: "Çok fazla deneme. Lütfen bir dakika sonra tekrar deneyin." },
+        { success: false, error: "Çok fazla deneme. Lütfen 15 dakika sonra tekrar deneyin." },
         { status: 429, headers: limit.retryAfter ? { "Retry-After": String(limit.retryAfter) } : {} }
       );
     }
@@ -26,7 +27,7 @@ export async function POST(request) {
     }
 
     const res = await query(
-      "SELECT id, username, password_hash, display_name FROM users WHERE username = $1",
+      "SELECT id, username, password_hash, display_name, COALESCE(token_version, 0) AS token_version FROM users WHERE username = $1",
       [username.trim()]
     );
 
@@ -48,6 +49,7 @@ export async function POST(request) {
     const token = await createToken({
       userId: user.id,
       username: user.username,
+      tokenVersion: user.token_version ?? 0,
     });
 
     const forwarded = request.headers.get("x-forwarded-for");
