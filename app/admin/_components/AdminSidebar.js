@@ -12,6 +12,7 @@ const blogSubItems = [
 
 const navItems = [
   { href: "/admin", label: "Ana sayfa", icon: "pi-home" },
+  { href: "/admin/profile", label: "Profil", icon: "pi-user" },
   { href: "/admin/visits", label: "Site ziyaretleri", icon: "pi-chart-line" },
   { href: "/admin/projects", label: "Projeler", icon: "pi-briefcase" },
   { href: "/admin/clients", label: "Mutlu Müşteriler", icon: "pi-building" },

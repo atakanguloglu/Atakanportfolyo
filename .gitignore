@@ -34,6 +34,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# yüklenen profil resimleri (sunucuda yüklenecek)
+/public/profile/
+
 # vercel
 .vercel
 

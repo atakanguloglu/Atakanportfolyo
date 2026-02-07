@@ -1,9 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// public path kullanıyoruz; IIS/mobilde import hash path bazen yüklenmeyebiliyor
-const PROFILE_IMAGE = "/profile.png";
-
 import Blog from "./_components/Blogs";
 import Clients from "./_components/Clients";
 import Testimonial from "./_components/Testimonial";
@@ -11,6 +8,7 @@ import ContactForm from "./_components/ContactForm";
 import Portfolio from "./_components/Portfolio";
 import TechLogosBackground from "./_components/TechLogosBackground";
 import { getAuthFromRequest } from "@/app/lib/auth-request";
+import { getSiteProfileImageUrl } from "@/app/lib/site-profile";
 
 import { Button } from "primereact/button";
 
@@ -25,6 +23,7 @@ import {
 
 export default async function Home() {
   const auth = await getAuthFromRequest();
+  const profileImage = await getSiteProfileImageUrl();
 
   return (
     <>
@@ -71,7 +70,7 @@ export default async function Home() {
             <div className="hidden lg:flex lg:w-2/5 bg-white dark:bg-gray-800 rounded-2xl justify-center items-center">
               <div className="relative aspect-square text-center max-h-[460px]">
                 <Image
-                  src={PROFILE_IMAGE}
+                  src={profileImage}
                   alt="Atakan Güloğlu - Portfolyo"
                   width={460}
                   height={460}
@@ -90,7 +89,7 @@ export default async function Home() {
             <div className="lg:w-2/5 flex justify-center items-center bg-[#F0F1F3] dark:bg-gray-700">
               <div className="relative aspect-square flex flex-col justify-center max-h-[460px]">
                 <Image
-                  src={PROFILE_IMAGE}
+                  src={profileImage}
                   alt="Atakan Güloğlu - Portfolyo"
                   width={460}
                   height={460}

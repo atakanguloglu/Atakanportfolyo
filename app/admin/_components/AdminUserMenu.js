@@ -8,13 +8,17 @@ export default function AdminUserMenu() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
     fetch("/api/auth/me", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
-        if (data.loggedIn && data.user) setUser(data.user);
+        if (data.loggedIn && data.user) {
+          setUser(data.user);
+          setAvatarError(false);
+        }
       })
       .catch(() => {});
   }, []);
@@ -51,11 +55,22 @@ export default function AdminUserMenu() {
         aria-expanded={open}
         aria-haspopup="true"
       >
-        <span className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-semibold text-sm shadow-inner shrink-0">
-          {(user.username || "A").charAt(0).toUpperCase()}
-        </span>
+        {user.avatar_url && !avatarError ? (
+          <span className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 bg-gray-200 dark:bg-gray-600">
+            <img
+              src={user.avatar_url}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={() => setAvatarError(true)}
+            />
+          </span>
+        ) : (
+          <span className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-semibold text-sm shadow-inner shrink-0">
+            {(user.display_name || user.username || "A").charAt(0).toUpperCase()}
+          </span>
+        )}
         <span className="hidden sm:inline text-sm font-medium text-gray-800 dark:text-gray-200 max-w-[120px] truncate">
-          {user.username}
+          {user.display_name || user.username}
         </span>
         <svg
           className={`w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
@@ -74,7 +89,7 @@ export default function AdminUserMenu() {
         >
           <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/80">
             <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">Giriş yapıldı</p>
-            <p className="text-sm font-semibold text-gray-900 dark:text-white truncate mt-0.5">{user.username}</p>
+            <p className="text-sm font-semibold text-gray-900 dark:text-white truncate mt-0.5">{user.display_name || user.username}</p>
           </div>
           <Link
             href="/admin/profile"
@@ -82,8 +97,8 @@ export default function AdminUserMenu() {
             className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-500/20 no-underline transition-colors"
             role="menuitem"
           >
-            <i className="pi pi-lock text-primary-500 dark:text-primary-400" />
-            Şifre değiştir
+            <i className="pi pi-user text-primary-500 dark:text-primary-400" />
+            Profil
           </Link>
           <button
             type="button"

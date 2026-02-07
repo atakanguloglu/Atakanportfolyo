@@ -9,7 +9,6 @@
 const path = require("path");
 const fs = require("fs");
 
-// .env.local veya .env oku (dotenv bağımlılığı yok)
 function loadEnv() {
   const envPath = fs.existsSync(path.join(__dirname, "..", ".env.local"))
     ? path.join(__dirname, "..", ".env.local")
@@ -60,6 +59,8 @@ async function run() {
       await client.query(statement + ";");
       console.log("[db:setup] Tablo/şema güncellendi.");
     }
+    // Mevcut kurulumlarda users tablosuna avatar_url ekle (yoksa)
+    await client.query("ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url VARCHAR(500);");
     console.log("[db:setup] Bitti. Tablolar hazır.");
   } catch (err) {
     console.error("[db:setup] Hata:", err.message);
